@@ -48,3 +48,10 @@ body {
     display: inline-block;
     margin-right: -4px;
   }
+
+
+.slides img{
+    width: 60%;
+    display: block;
+    margin: auto;
+  }
