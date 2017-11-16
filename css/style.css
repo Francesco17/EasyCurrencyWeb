@@ -8,7 +8,7 @@ body {
   background-color: #444;
   text-align: center;
   padding: 0;
-  margin: 0;
+  margin: auto;
 }
 .nav li {
   font-family: 'Oswald', sans-serif;
@@ -49,9 +49,19 @@ body {
     margin-right: -4px;
   }
 
-
 .slides img{
-    width: 60%;
-    display: block;
+    width: 70%;
     margin: auto;
+    border-style: solid;
   }
+
+.block ul,li{
+  margin: 0;
+  padding: 0 0 0 15px;
+}
+
+.block {
+  margin: auto;
+  float: left;
+  margin: 0 20px 0 0;
+}
