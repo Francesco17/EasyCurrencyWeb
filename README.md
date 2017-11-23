@@ -1,5 +1,5 @@
 # ltw_project
-The LTW project is a prject to be done within the course of Web Languages and Technologies.
+The LTW project is a project to be done within the course of Web Languages and Technologies.
 
 It consists of a client-side Web interface in which the student shows that he acquired notions about the following technologies:
 
