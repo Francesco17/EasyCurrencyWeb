@@ -12,4 +12,37 @@ Progetto LTW
 
 	pagina 3 - gestione portafogli utenti: andamento, utili/perdite
 
-	
+_________________________________________________________________________________________
+
+
+jsonrates.com
+http://www.apilayer.net/api/live?access_key=cdaa48c0799e268d91b98681529912eb
+
+
+// "live" endpoint - request the most recent exchange rate data
+
+http://apilayer.net/api/live
+
+    ? access_key = cdaa48c0799e268d91b98681529912eb
+    & source = GBP
+    & currencies = USD,AUD,CAD,PLN,MXN
+    & format = 1
+
+// Christian, click on the URL above to get the most recent exchange
+// rates for USD, AUD, CAD, PLN and MXN
+
+
+
+// "historical" endpoint - request historical rates for a specific day
+
+http://apilayer.net/api/historical
+
+    ? access_key = YOUR_ACCESS_KEY
+    & date = YYYY-MM-DD
+    & source = EUR
+    & currencies = USD,AUD,CAD,PLN,MXN
+    & format = 1
+
+// on the URL above to request historical data from
+// 2010-11-23 for the currencies USD, AUD, CAD, PLN and MXN
+
