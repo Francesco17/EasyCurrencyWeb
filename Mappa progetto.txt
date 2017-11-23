@@ -1,0 +1,15 @@
+Progetto LTW
+
+	CSS stile
+
+	impostazione sito generale: info, contatti,  iscrizione utenti con salvataggio in locale, form contatto	
+
+	pagina 1 - convertitore cambi valute
+		stile tendina classico HTML5
+
+	pagina 2 - matrice bottoni cambi valute
+		sezione HTML dinamica risultati		JQUERY o JAVASCRIPT ?
+
+	pagina 3 - gestione portafogli utenti: andamento, utili/perdite
+
+	
