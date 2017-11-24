@@ -3,6 +3,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/style.css">
+<script type="text/javascript" src="js/login.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <head>
 <title>Analisi Finanziaria</title>
 </head>
@@ -25,8 +27,20 @@
       &nbsp;
     </div>
     <div class="box1">
-      Questo è il box1
+      <div class="content" id="content">
+          <h2>Esegui il login</h2>
+          <h4>Accedi a più funzionalità! </h4>
+          <form name="myform" id="form" onsubmit="login(); return false;">
+            Username:
+            <input type="text" name="username" id="username">
+            Password:
+            <input type="password" name="password" id="password">
+            <input type="submit" value="Invia">
+          </form>
+      </div>
+      <div class="content" id="logged"></div>
     </div>
+
 
     <div>
       &nbsp;
@@ -89,7 +103,5 @@
   <img class="img" src="images/img3.jpg">
   <hr />
 </div>-->
-
-<script type="text/javascript" src="slideshow.js"></script>
 
 </html>
