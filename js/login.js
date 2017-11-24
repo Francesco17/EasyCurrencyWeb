@@ -1,3 +1,4 @@
+//function for the login
 function login() {
   var x = document.forms[0];
   var username = "";
@@ -20,4 +21,13 @@ function login() {
   else{
     alert("username errato.");
   }
+}
+
+//function to validate the form of currency converter
+function validateForm(){
+
+    var z = document.table.["table"]["val1"].value;
+    if(!(/)\D/.test(z))){
+        alert("Inserire solo numeri.")
+    }
 }

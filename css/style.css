@@ -57,6 +57,21 @@ html{
 .content{
   padding-left: 10px;
 }
+
+.flex-container {
+  display: flex;
+  background-color: inherit;
+}
+.flex-container>div {
+  background-color: grey;
+  flex-basis: 200px;
+  margin: 20px;
+  padding:10px;
+  height: 160px;
+}
+.select{
+  width: 150px;
+}
 /*
 @media screen and (min-width: 60px) {
   .nav li {
