@@ -3,8 +3,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/style.css">
-<script type="text/javascript" src="js/login.js"></script>
-<script type="text/javascript" src="js/storage.js"></script>
+<script type="text/javascript" src="js/user.js"></script>
+<!--<script type="text/javascript" src="js/storage.js"></script>-->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <head>
 <title>Analisi Finanziaria</title>
@@ -36,12 +36,32 @@
             <input type="text" name="username" id="username">
             Password:
             <input type="password" name="password" id="password">
-            <input type="submit" value="Invia">
+            <input type="submit" value="Login">
           </form>
+          <h3>Registrati, se ancora non l'hai fatto...</h3>
+          <button id="signup" onclick="show_reg(); return false;">Registrati</button>
       </div>
+
       <div class="content" id="logged"></div>
+
     </div>
 
+    <div class="box1" id="box_reg" style="display: none">
+      <div class="content" id="content" >
+
+        <div id="registration">
+          <h2>Completa il form per registrarti al sito.</h2>
+          <form name="myform_reg" id="form_reg" onsubmit="registration(); return false;">
+            Username:
+            <input type="text" name="username" id="uname">
+            Password:
+            <input type="password" name="password" id="passw">
+            <input type="submit" value="Registrami">
+          </form>
+        </div>
+
+      </div>
+    </div>
 
     <div>
       &nbsp;
