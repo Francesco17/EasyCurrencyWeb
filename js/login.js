@@ -24,6 +24,7 @@ function login() {
 }
 
 //function to validate the form of currency converter
+/*
 function validateForm(){
 
     var z = document.table.["table"]["val1"].value;
@@ -31,3 +32,4 @@ function validateForm(){
         alert("Inserire solo numeri.")
     }
 }
+*/
