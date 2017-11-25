@@ -50,6 +50,7 @@ function registration(){
   $('#box_reg').hide();
 }
 
+//function to check whether the user is registered on the platform.
 function isInLocal(username){
   if(typeof(Storage)!=="undefined"){
     if (localStorage.getItem(username)) {
@@ -64,7 +65,7 @@ function isInLocal(username){
   }
 }
 
-//function to validate the form of currency converter
+//*******function to validate the form of currency converter*******************
 /*
 function validateForm(){
 
