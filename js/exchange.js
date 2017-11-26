@@ -4,7 +4,7 @@ var val1 = document.getElementById('val1').value;
 // set endpoint and your access key
 endpoint = 'live'
 access_key = '36ed860ff64b5e9961d86f10bc053a6f';
-source = "USD";
+source = "USD"; //it could be only usd for free plan api
 
 e = document.getElementById("curr_1");
 from = e.options[e.selectedIndex].value;
