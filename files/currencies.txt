@@ -45,7 +45,7 @@
 <option value='EGP' title='Egyptian Pound'>EGP</option>
 <option value='ERN' title='Eritrean Nakfa'>ERN</option>
 <option value='ETB' title='Ethiopian Birr'>ETB</option>
-<option value='EUR' title='Euro' selected>EUR</option>
+<option value='EUR' title='Euro'>EUR</option>
 <option value='FJD' title='Fijian Dollar'>FJD</option>
 <option value='FKP' title='Falkland Islands Pound'>FKP</option>
 <option value='GBP' title='British Pound Sterling'>GBP</option>
@@ -148,7 +148,7 @@
 <option value='TZS' title='Tanzanian Shilling'>TZS</option>
 <option value='UAH' title='Ukrainian Hryvnia'>UAH</option>
 <option value='UGX' title='Ugandan Shilling'>UGX</option>
-<option value='USD' title='United States Dollar'>USD</option>
+<option value='USD' title='United States Dollar' selected>USD</option>
 <option value='UYU' title='Uruguayan Peso'>UYU</option>
 <option value='UZS' title='Uzbekistan Som'>UZS</option>
 <option value='VEF' title='Venezuelan Bolívar'>VEF</option>
