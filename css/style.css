@@ -75,29 +75,26 @@ html{
 }
 .about-container{
   display: flex;
+  height: 90 vh;
+}
+.left{
+  min-width: 200px;
   background-color: #d5e1df;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3);
+  border-radius: 5px;
 }
-.fixed{
-  background-color: inherit;
-  width: 200px;
-}
-.flex-item{
-  background-color: inherit;
+.right{
   flex-grow: 1;
+  background-color: #d5e1df;
+  margin-left: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3);
+  border-radius: 5px;
+  padding: 10px;
+  display: none;
 }
 
 
 /*
-.about-content{
-  display: inline-block;
-  background-color: #d5e1df;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3);
-  border-radius: 5px;
-  width: auto;
-  height: auto;
-  padding: 10px;
-}
-
 @media screen and (min-width: 60px) {
   .nav li {
     width: 150px;
