@@ -82,9 +82,8 @@
                 <tr>
                   <td>
                     <select class="currencies" id="curr_1">
-                       <script type="text/javascript">
-                          $(".currencies").load("files/currencies.txt");
-                       </script>
+                      <option value='AFN' title='Afghan Afghani'>AFN</option>
+                      <option value='ALL' title='Albanian Lek'>ALL</option>
                     </select>
                   </td>
                 </tr>
@@ -106,12 +105,12 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>
-                    <select class="currencies" id="curr_2">
-                      <script type="text/javascript">
-                         $(".currencies").load("files/currencies.txt");
-                      </script>
-                    </select>
+                  <td class="curr">
+                    <script type="text/javascript">
+                      $(".curr").load("files/currencies.html");
+                      //non funziona.
+                      $("#curr_2 option[value=EUR]").attr("selected", true);
+                    </script>
                   </td>
                 </tr>
                 <div>

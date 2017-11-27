@@ -29,8 +29,8 @@
     </div>
 
     <div class="about-container">
-      <div class="left">
-        <a id="chri_ph" href="#"><img src="images/christian.jpg" style="margin: 10px; display: block"/></a>
+      <div class="left" id="chri_ph">
+        <a href="#"><img src="images/christian.jpg" style="margin: 10px; display: block"/></a>
       </div>
       <div class="right">content</div>
     </div>
@@ -38,11 +38,18 @@
     <br />
 
     <div class="about-container">
-      <div class="left">
-        <a id="fra_ph" href="#"><img src="images/francesco.jpg" style="margin: 10px; display: block"/></a>
+      <div class="left" id="fra_ph">
+        <a class="show_hide" href="#"><img src="images/francesco.jpg" style="margin: 10px; display: block"/></a>
       </div>
       <div class="right">content</div>
     </div>
+    <script type="text/javascript">
+    function imgf(){
+      $(".show_hide").click(function(){
+        $(".right").show();
+      });
+    }
+    </script>
 
   </div>
 
