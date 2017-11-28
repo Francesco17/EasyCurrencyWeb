@@ -33,9 +33,9 @@
           <h4>Accedi a più funzionalità! </h4>
           <form name="myform" id="form" onsubmit="login(); return false;">
             Username:
-            <input type="text" name="username" id="username">
+            <input type="text" name="username" id="username" required>
             Password:
-            <input type="password" name="password" id="password">
+            <input type="password" name="password" id="password" required>
             <input type="submit" value="Login">
           </form>
           <h3>Registrati, se ancora non l'hai fatto...</h3>
@@ -53,9 +53,9 @@
           <h2>Completa il form per registrarti al sito.</h2>
           <form name="myform_reg" id="form_reg" onsubmit="registration(); return false;">
             Username:
-            <input type="text" name="username" id="uname">
+            <input type="text" name="username" id="uname" required>
             Password:
-            <input type="password" name="password" id="passw">
+            <input type="password" name="password" id="passw" required>
             <input type="submit" value="Registrami">
             <input type="submit" value="Annulla" onclick="hide_reg(); return false;"></button>
           </form>
@@ -68,9 +68,6 @@
       </div>
     </div>
 
-    <div>
-      &nbsp;
-    </div>
     <div class="box1" style="height: 300px">
       <div class="content" id="content">
           <h2>Converti Valute</h2>
@@ -96,7 +93,7 @@
                 </div>
                 <tr>
                   <td>
-                    <input type="text" id="val1" name="val1"/>
+                    <input type="text" id="val1" name="val1" size="19"/>
                   </td>
                 </tr>
               </table>
@@ -120,7 +117,7 @@
                 </div>
                 <tr>
                   <td>
-                    <input type="text" id="val2" name="val2" />
+                    <input type="text" id="val2" name="val2" size="19"/>
                   </td>
                 </tr>
               </table>
