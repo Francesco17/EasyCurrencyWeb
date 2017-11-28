@@ -57,9 +57,13 @@
             Password:
             <input type="password" name="password" id="passw">
             <input type="submit" value="Registrami">
-            <!--<input type="submit" value="Annulla" />-->
+            <input type="submit" value="Annulla" onclick="hide_reg(); return false;"></button>
           </form>
         </div>
+
+        <script type="text/javascript">
+
+        </script>
 
       </div>
     </div>
@@ -83,6 +87,7 @@
                   <td class="curr1">
                     <script type="text/javascript">
                       $(".curr1").load("files/currencies1.html");
+                      //$("#curr_1").val("EUR").attr("selected", true);
                     </script>
                   </td>
                 </tr>

@@ -29,6 +29,19 @@ function show_reg(){
   $('#box_reg').show();
 }
 
+function hide_reg(){
+  $("#box_reg").hide();
+}
+
+function check_user(username){
+  if (localStorage) {
+    var tmp = localStorage.getItem(username);
+    if (tmp) {
+      return true;
+    }
+  }
+}
+
 function registration(){
   var x = document.forms["form_reg"];
   var username = "";
@@ -37,17 +50,25 @@ function registration(){
       username = x.elements[0].value;
       password = x.elements[1].value;
   }
-  //setting localStorage
+
   if (localStorage) {
-    localStorage.setItem(username, password);
-    console.log(localStorage.getItem(username));
+
+    if (check_user(username)) {
+      alert("Username già in uso. Riprova..");
+      $("#uname").val('');
+      $("#passw").val('');
+    }
+    else {
+      localStorage.setItem(username, password);
+      //console.log(localStorage.getItem(username));
+      alert(username+", la registrazione è avvenuta con successo!");
+      $('#box_reg').hide();
+    }
+
   }
   else{
     alert("registrazione fallita!");
   }
-
-  alert(username+", la registrazione è avvenuta con successo!");
-  $('#box_reg').hide();
 }
 
 //function to check whether the user is registered on the platform.
