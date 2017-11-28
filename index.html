@@ -81,11 +81,14 @@
                   </td>
                 </tr>
                 <tr>
-                  <td class="curr1">
-                    <script type="text/javascript">
-                      $(".curr1").load("files/currencies1.html");
-                      //$("#curr_1").val("EUR").attr("selected", true);
-                    </script>
+                  <td>
+                    <select class="currencies" id="curr_1">
+                      <script type="text/javascript">
+                      $("#curr_1").load("files/currencies.html", function(){
+                        $("#curr_1").val("EUR");
+                      });
+                      </script>
+                    </select>
                   </td>
                 </tr>
                 <div>
@@ -106,10 +109,14 @@
                   </td>
                 </tr>
                 <tr>
-                  <td class="curr2">
-                    <script type="text/javascript">
-                      $(".curr2").load("files/currencies2.html");
-                    </script>
+                  <td>
+                    <select class="currencies" id="curr_2">
+                      <script type="text/javascript">
+                      $("#curr_2").load("files/currencies.html", function(){
+                        $("#curr_2").val("USD");
+                      });
+                      </script>
+                    </select>
                   </td>
                 </tr>
                 <div>
@@ -140,10 +147,6 @@
     </div>
 
     </body>
-
-
-
-
 <!--
     <footer>
       <div class="footer">
@@ -174,9 +177,6 @@
     </footer>
 
 -->
-
-
-
 
 <!--<div class="slides">
   <img class="img" src="images/img1.jpg">
