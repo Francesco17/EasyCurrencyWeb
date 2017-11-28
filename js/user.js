@@ -24,7 +24,7 @@ function login() {
   }
 }
 function hide_log(){
-  $("#box_log").fadeOut();
+  $("#box_log").hide();
 }
 //function for showing the registration box
 function show_reg(){
@@ -32,7 +32,8 @@ function show_reg(){
 }
 
 function hide_reg(){
-  $("#box_reg").fadeOut();
+  $("#box_reg").hide();
+  $("#box_log").fadeIn();
 }
 
 function registration(){

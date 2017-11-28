@@ -7,6 +7,10 @@ source = "USD";
 
 var val1 = document.getElementById('val1').value;
 
+if (val1 == '') {
+  return false;
+}
+
 e = document.getElementById("curr_1");
 from = e.options[e.selectedIndex].value;
 
@@ -37,4 +41,16 @@ $.ajax({
 
     }
 });
+}
+// To be done..
+function invert_curr(){
+//   var val1 = document.getElementById('val1').value;
+//
+//   e = document.getElementById("curr_1");
+//   from = e.options[e.selectedIndex].value;
+//   console.log(from);
+//
+//   e1 = document.getElementById("curr_2");
+//   to = e1.options[e1.selectedIndex].value;
+//   console.log(to);
 }
