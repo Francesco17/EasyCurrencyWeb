@@ -23,23 +23,16 @@ function login() {
     alert("username errato.");
   }
 }
-
+function hide_log(){
+  $("#box_log").fadeOut();
+}
 //function for showing the registration box
 function show_reg(){
-  $('#box_reg').show();
+  $("#box_reg").fadeIn();
 }
 
 function hide_reg(){
-  $("#box_reg").hide();
-}
-
-function check_user(username){
-  if (localStorage) {
-    var tmp = localStorage.getItem(username);
-    if (tmp) {
-      return true;
-    }
-  }
+  $("#box_reg").fadeOut();
 }
 
 function registration(){
@@ -53,7 +46,7 @@ function registration(){
 
   if (localStorage) {
 
-    if (check_user(username)) {
+    if (isInLocal(username)) {
       alert("Username già in uso. Riprova..");
       $("#uname").val('');
       $("#passw").val('');

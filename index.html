@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="css/style.css">
 <script type="text/javascript" src="js/user.js"></script>
 <script type="text/javascript" src="js/exchange.js"></script>
+<script type="text/javascript" src="js/animations.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <head>
 <title>Analisi Finanziaria</title>
@@ -27,7 +28,7 @@
     <div>
       &nbsp;
     </div>
-    <div class="box1">
+    <div class="box1" id="box_log">
       <div class="content" id="content">
           <h2>Esegui il login</h2>
           <h4>Accedi a più funzionalità! </h4>
@@ -39,7 +40,7 @@
             <input type="submit" value="Login">
           </form>
           <h3>Registrati, se ancora non l'hai fatto...</h3>
-          <button id="signup" onclick="show_reg(); return false;">Registrati</button>
+          <button id="signup" onclick="hide_log(); show_reg(); return false;">Registrati</button>
       </div>
 
       <div class="content" id="logged"></div>
