@@ -27,163 +27,24 @@
     <div>
       &nbsp;
     </div>
-    <div class="box1">
+    <div class="box1" style="height: auto; text-align:center; padding: 10px">
       <div class="content" id="content">
-          <h2>Esegui il login</h2>
-          <h4>Accedi a più funzionalità! </h4>
-          <form name="myform" id="form" onsubmit="login(); return false;">
-            Username:
-            <input type="text" name="username" id="username">
-            Password:
-            <input type="password" name="password" id="password">
-            <input type="submit" value="Login">
-          </form>
-          <h3>Registrati, se ancora non l'hai fatto...</h3>
-          <button id="signup" onclick="show_reg(); return false;">Registrati</button>
-      </div>
-
-      <div class="content" id="logged"></div>
-
-    </div>
-
-    <div class="box1" id="box_reg" style="display: none">
-      <div class="content" id="content" >
-
-        <div id="registration">
-          <h2>Completa il form per registrarti al sito.</h2>
-          <form name="myform_reg" id="form_reg" onsubmit="registration(); return false;">
-            Username:
-            <input type="text" name="username" id="uname">
-            Password:
-            <input type="password" name="password" id="passw">
-            <input type="submit" value="Registrami">
-            <!--<input type="submit" value="Annulla" />-->
-          </form>
-        </div>
-
+          <button style="height:30px;width:100px" value="grafico">Grafico</button>
+          <button style="height:30px;width:100px" value="grafico">Matrice</button>
       </div>
     </div>
 
     <div>
       &nbsp;
     </div>
-    <div class="box1" style="height: 300px">
+    <div class="box1" style="height:500px; padding: 10px">
       <div class="content" id="content">
-          <h2>Converti Valute</h2>
-          <p>Strumento semplice per convertire le valute, nei principali cambi</p>
-          <div class="flex-container">
-            <div>
-              <table class="table1">
-                <tr>
-                  <td>
-                    Seleziona una valuta:
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <select class="currencies" id="curr_1">
-                       <script type="text/javascript">
-                          $(".currencies").load("files/currencies.txt");
-                       </script>
-                    </select>
-                  </td>
-                </tr>
-                <div>
-                  &nbsp;
-                </div>
-                <tr>
-                  <td>
-                    <input type="text" id="val1" name="val1"/>
-                  </td>
-                </tr>
-              </table>
-            </div>
-            <div>
-              <table class="table1">
-                <tr>
-                  <td>
-                    Seleziona una valuta:
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <select class="currencies" id="curr_2">
-                      <script type="text/javascript">
-                         $(".currencies").load("files/currencies.txt");
-                      </script>
-                    </select>
-                  </td>
-                </tr>
-                <div>
-                  &nbsp;
-                </div>
-                <tr>
-                  <td>
-                    <input type="text" id="val2" name="val2" />
-                  </td>
-                </tr>
-              </table>
-            </div>
-            <div style="background: inherit;">
-              <input type="submit" onclick="currencyconverter(); return false;" value="Converti" />
-            </div>
-          </div>
+        qua fai il display della matrice e del grafico e poi li colleghi ai bottoni
       </div>
-    </div>
-
-    <div>
-      &nbsp;
-    </div>
-    <div class="box1">
-      <a href="http://www.xe.com/currencyconverter/">XE Currency Converter</a>
-    </div>
 
     </div>
+    </div>
 
-    </body>
-
-
-
-
-<!--
-    <footer>
-      <div class="footer">
-        <div class="block">
-          <h3>BLOCCO 1</h3>
-          <ul>
-            <li>ciao</li>
-            <li>cacao</li>
-          </ul>
-        </div>
-
-        <div class="block">
-          <h3>BLOCCO 2</h3>
-          <ul>
-            <li>ciao</li>
-            <li>cacao</li>
-          </ul>
-        </div>
-
-        <div class="block">
-          <h3>BLOCCO 3</h3>
-          <ul>
-            <li>ciao</li>
-            <li>cacao</li>
-          </ul>
-        </div>
-      </div>
-    </footer>
-
--->
-
-
-
-
-<!--<div class="slides">
-  <img class="img" src="images/img1.jpg">
-  <img class="img" src="images/img2.jpg">
-  <img class="img" src="images/img3.jpg">
-  <hr />
-</div>-->
+</body>
 
 </html>
