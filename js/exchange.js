@@ -44,13 +44,20 @@ $.ajax({
 }
 // To be done..
 function invert_curr(){
-//   var val1 = document.getElementById('val1').value;
-//
-//   e = document.getElementById("curr_1");
-//   from = e.options[e.selectedIndex].value;
-//   console.log(from);
-//
-//   e1 = document.getElementById("curr_2");
-//   to = e1.options[e1.selectedIndex].value;
-//   console.log(to);
+
+  //get the option selected on the left
+  e = document.getElementById("curr_1");
+  from = e.options[e.selectedIndex].value;
+
+  //get the option selected on the right
+  e1 = document.getElementById("curr_2");
+  to = e1.options[e1.selectedIndex].value;
+
+  //set from to to and viceversa in the select box
+  $('#curr_2').val(from);
+  $('#curr_1').val(to);
+
+  //once the currencies are exchanged
+  currencyconverter();
+
 }
