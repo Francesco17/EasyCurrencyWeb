@@ -92,37 +92,3 @@ html{
   padding: 10px;
   display: none;
 }
-
-
-/*
-@media screen and (min-width: 60px) {
-  .nav li {
-    width: 150px;
-    border-bottom: none;
-    height: 80px;
-    line-height: 70px;
-    font-size: 1.4em;
-  }
-
-  .nav li {
-    display: inline-block;
-  }
-}
-*/
-/*
-.slides img{
-    width: 70%;
-    margin: auto;
-    border-style: solid;
-  }
-
-.block ul,li{
-  margin: 0;
-  padding: 0 0 0 15px;
-}
-
-.block {
-  margin: auto;
-  float: left;
-  margin: 0 20px 0 0;
-}*/
