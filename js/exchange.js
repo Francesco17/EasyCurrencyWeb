@@ -42,7 +42,7 @@ $.ajax({
     }
 });
 }
-// To be done..
+//done..
 function invert_curr(){
 
   //get the option selected on the left

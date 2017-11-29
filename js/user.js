@@ -23,11 +23,10 @@ function login() {
     alert("username errato.");
   }
 }
-function hide_log(){
-  $("#box_log").hide();
-}
+
 //function for showing the registration box
 function show_reg(){
+  $("#box_log").hide();
   $("#box_reg").fadeIn();
 }
 
@@ -56,7 +55,7 @@ function registration(){
       localStorage.setItem(username, password);
       //console.log(localStorage.getItem(username));
       alert(username+", la registrazione è avvenuta con successo!");
-      $('#box_reg').hide();
+      hide_reg();
     }
 
   }
