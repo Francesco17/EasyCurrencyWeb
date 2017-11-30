@@ -1,5 +1,42 @@
 DOCUMENTAZIONE PROGETTO LTW
 
+***Git e Github***
+
+Git è la repo locale, mentre GitHub è la repo remota.
+
+La repo locale è composta da tre elementi:
+Directory di lavoro -  cartella dove lavori
+La staging area - spazio di transito per i files
+Puntatore HEAD - puntatore all'ultimo commit fatto.
+
+i concetti principali sono:
+
+Stage file - la staging area serve per mettere i file pronti per essere committati
+Commit file - il commit è uno snapshot del progetto in un determinato momento
+Push - azione per aggiornare la repo remota
+Pull - azione per aggiornare la repo locale
+
+Branch: I branch sono ramificazioni utilizzati per sviluppare features che sono isolate l'una dall'altra. Il branch master è quello di default quando si crea la repo. Si possono creare altri branch e incorporarli nel master una volta completati (tramite il merge).
+
+**comandi utili*
+
+git add <nomefile> --> per aggiungere un file alla staging area
+Git add * --> per aggiungere tutti i file modificati
+
+Git commit -m "Messaggio per la commit" --> per fare il commit *in locale* dei cambiamenti
+
+Git push origin <nomedelbranch> --> per aggiornare la repo remota (origin) delle modifiche
+
+Git checkout -b nuovobranch --> crea un branch chiamato nuovobranch e passa a questo.
+
+Git checkout master --> ritorna di nuovo su master
+
+Git branch -d nuovobranch --> cancella il nuovobranch
+
+Git pull origin <nomebranchopzionale> --> aggiorna il tuo repo locale alla commit più recente.
+
+Git log --> per vedere il log dei commit
+
 ***File e Composizione***
 
 L'intero progetto è composto da più file che si trovano all'interno della cartella "ltw_project".
