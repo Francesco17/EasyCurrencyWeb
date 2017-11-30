@@ -9,6 +9,7 @@ function login() {
   }
   if (isInLocal(username)) {
     _user = JSON.parse(localStorage.getItem(username));
+    
     if ( password == _user.password) {
       sessionStorage.setItem(username, _user);
       document.getElementById("logged").innerHTML = "<h2>Benvenuto, "+username+"!</h2>";
@@ -55,7 +56,7 @@ function registration(){
       $("#passw").val('');
     }
     else {
-      creo nuovo oggetto user e lo metto nel localStorage
+      // creo nuovo oggetto user e lo metto nel localStorage
       user = new user(username, password);
       localStorage.setItem(user.username, JSON.stringify(user));
 
