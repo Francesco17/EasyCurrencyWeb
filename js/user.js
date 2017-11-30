@@ -24,18 +24,20 @@ function login() {
   }
 }
 
-//function for showing the registration box
+//function che nasconde il box di login e fa vedere quello di registrazione
 function show_reg(){
   $("#box_log").hide();
   $("#box_reg").fadeIn();
 }
-
+//function che nasconde il box di registrazione e fa vedere quello di login
 function hide_reg(){
   $("#box_reg").hide();
   $("#box_log").fadeIn();
 }
 
+//function per la registrazione degli utenti
 function registration(){
+  // valori inseriti dall'utente nel form
   var x = document.forms["form_reg"];
   var username = "";
   var password = "";
@@ -43,9 +45,9 @@ function registration(){
       username = x.elements[0].value;
       password = x.elements[1].value;
   }
-
+  // verifico che il localStorage sia supportato dal browser
   if (localStorage) {
-
+    // verifico che username non sia stato già scelto
     if (isInLocal(username)) {
       alert("Username già in uso. Riprova..");
       $("#uname").val('');

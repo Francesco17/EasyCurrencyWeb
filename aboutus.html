@@ -18,7 +18,6 @@
         <li class="logo"><a href="index.html">PROGETTO</a></li>
         <li class="home"><a href="index.html">Home</a></li>
         <li class="currencies-page"><a href="realtime_curr.html">Currencies</a></li>
-        <!--<li class="about"><a href="#">About</a></li>-->
         <li class="contacts"><a href="contacts.html">Contacts</a></li>
         <li class="about"><a class="active" href="aboutus.html">About us</a></li>
       </ul>
@@ -33,10 +32,13 @@
       </div>
     </div>
 
+    <!-- definisco un container per i due box (foto e testo) -->
     <div class="about-container">
+      <!-- il box contentente la foto sta a sisnistra, da qui left -->
       <div class="left" id="chri_ph">
         <a href="#"><img src="images/christian.jpg" style="margin: 10px; display: block"/></a>
       </div>
+      <!-- il box per il contenuto sta a destra, da qui right -->
       <div class="right" id="right_1">content</div>
     </div>
 
@@ -49,6 +51,7 @@
       <div class="right" id="right_2">content</div>
     </div>
 
+    <!-- script che gestice l'animazione quando si clicca sulle immagini -->
     <script type="text/javascript">
     var clicked_1, clicked_2 = false;
     $(".about-container #chri_ph a").click(function(e){

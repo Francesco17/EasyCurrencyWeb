@@ -18,19 +18,21 @@
         <li class="logo"><a href="#">PROGETTO</a></li>
         <li class="home"><a class="active" href="#">Home</a></li>
         <li class="currencies-page"><a href="realtime_curr.html">Currencies</a></li>
-        <!--<li class="about"><a href="#">About</a></li>-->
         <li class="contacts"><a href="contacts.html">Contacts</a></li>
         <li class="about"><a href="aboutus.html">About us</a></li>
       </ul>
     </div>
 
+    <!-- aggiungo uno spazio tra i 2 div -->
     <div>
       &nbsp;
     </div>
+    <!-- primo box contenente il l'interfaccia di login -->
     <div class="box1" id="box_log">
       <div class="content" id="content">
           <h2>Esegui il login</h2>
           <h4>Accedi a più funzionalità! </h4>
+          <!-- al click sul bottone chiama la funzione login() -->
           <form name="myform" id="form" onsubmit="login(); return false;">
             Username:
             <input type="text" name="username" id="username" required>
@@ -39,18 +41,20 @@
             <input type="submit" value="Login">
           </form>
           <h3>Registrati, se ancora non l'hai fatto...</h3>
+          <!-- al click sul bottone chiama la funzione show_reg -->
           <button id="signup" onclick="show_reg(); return false;">Registrati</button>
       </div>
-
+      <!-- div vuoto che ospita l'interfaccia per utenti loggati -->
       <div class="content" id="logged"></div>
-
     </div>
 
+    <!-- secondo box contenente l'interfaccia per la registrazione, inizialmente nascosto -->
     <div class="box1" id="box_reg" style="display: none">
       <div class="content" id="content" >
 
         <div id="registration">
           <h2>Completa il form per registrarti al sito.</h2>
+          <!-- al click chiama la funzione registration() -->
           <form name="myform_reg" id="form_reg" onsubmit="registration(); return false;">
             Username:<br />
             <input type="text" name="username" id="uname" required><br />
@@ -58,6 +62,7 @@
             <input type="password" name="password" id="passw" required><br />
             <p></p>
             <input type="submit" value="Registrami">
+            <!-- al click chiama la funzione hide_reg -->
             <input type="submit" value="Annulla" onclick="hide_reg(); return false;"></button>
           </form>
         </div>
@@ -65,12 +70,14 @@
       </div>
     </div>
 
+    <!-- box contentente il convertitore di valute, l'altezza è fissata -->
     <div class="box1" style="height: 300px">
       <div class="content" id="content">
           <h2>Converti Valute</h2>
           <p>Strumento semplice per convertire le valute, nei principali cambi</p>
           <div class="flex-container">
             <div>
+              <!-- organizzo il contenuto in una tabella -->
               <table class="table1">
                 <tr>
                   <td>
@@ -80,6 +87,7 @@
                 <tr>
                   <td>
                     <select class="currencies" id="curr_1">
+                      <!-- carico le options e seleziono il valore di default -->
                       <script type="text/javascript">
                       $("#curr_1").load("files/currencies.html", function(){
                         $("#curr_1").val("EUR");
