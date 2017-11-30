@@ -6,9 +6,12 @@
 <script type="text/javascript" src="js/user.js"></script>
 <script type="text/javascript" src="js/exchange.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <head>
-<title>Analisi Finanziaria</title>
+	<title>Analisi Finanziaria</title>
+	<script src="plotly-latest.min.js"></script>
 </head>
+
 <body>
 
   <div class="container">
@@ -36,12 +39,31 @@
       </div>
     </div>
 
+
     <div>
       &nbsp;
     </div>
     <div class="box1" style="height:500px; padding: 10px">
       <div class="content" id="content">
-        qua fai il display della matrice e del grafico e poi li colleghi ai bottoni
+
+
+<!-- formati date HTML5	-->
+	<form>
+  		<label>da quale data parte il grafico?
+ 			<input type="datetime" name="datainizio">
+  		</label>
+ 	</form>
+
+
+	<div id="GraficoStoricoValuta" style="width:830px;height:450px;"></div>
+	<script>
+		TESTER = document.getElementById('GraficoStoricoValuta');
+		Plotly.plot( TESTER, [{
+		x: [1, 2, 3, 4, 5],
+		y: [1, 2, 4, 8, 16] }], {
+		margin: { t: 3 } } );
+	</script>
+
       </div>
 
     </div>
