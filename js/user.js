@@ -8,8 +8,9 @@ function login() {
       password = x.elements[1].value;
   }
   if (isInLocal(username)) {
-    if ( password == localStorage.getItem(username)) {
-      sessionStorage.setItem(username,password);
+    _user = JSON.parse(localStorage.getItem(username));
+    if ( password == _user.password) {
+      sessionStorage.setItem(username, _user);
       document.getElementById("logged").innerHTML = "<h2>Benvenuto, "+username+"!</h2>";
       $('#content').submit(function(){
           $(this).hide();
@@ -54,8 +55,10 @@ function registration(){
       $("#passw").val('');
     }
     else {
-      localStorage.setItem(username, password);
-      //console.log(localStorage.getItem(username));
+      creo nuovo oggetto user e lo metto nel localStorage
+      user = new user(username, password);
+      localStorage.setItem(user.username, JSON.stringify(user));
+
       alert(username+", la registrazione è avvenuta con successo!");
       hide_reg();
     }
@@ -80,6 +83,15 @@ function isInLocal(username){
     alert("Mi dispiace, ma il tuo browser non supporta il local storage..")
   }
 }
+
+//definizione oggetto user
+function user(username, password){
+  this.username = username;
+  this.password = password;
+  this.balance = "100";
+}
+
+//inserire la funzione isInLocal come metodo dell'oggetto user
 
 //*******function to validate the form of currency converter*******************
 /*
