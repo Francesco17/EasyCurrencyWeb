@@ -9,12 +9,19 @@ function login() {
   }
   if (isInLocal(username)) {
     _user = JSON.parse(localStorage.getItem(username));
-    
+
     if ( password == _user.password) {
-      sessionStorage.setItem(username, _user);
-      document.getElementById("logged").innerHTML = "<h2>Benvenuto, "+username+"!</h2>";
+      sessionStorage.setItem(_user.username, JSON.stringify(_user));
+      document.getElementById("logged").innerHTML = "<h2>Benvenuto, "+_user.username+"!</h2>"+
+      " <input type='submit' id='btn_logged' value='Logout' >";
+      $("#btn_logged").click(function(){
+        logout(_user.username);
+        return false;
+      });
+      console.log(JSON.parse(sessionStorage.getItem(username)));
       $('#content').submit(function(){
           $(this).hide();
+          show_logged();
       });
     }
     else{
@@ -24,6 +31,22 @@ function login() {
   else{
     alert("username errato.");
   }
+}
+
+// funzione per il logout
+function logout(username){
+  // assumo che solo un utente alla volta sia loggato sulla piattaforma
+  sessionStorage.removeItem(username);
+  alert(username+", hai eseguito correttamente il logout!");
+
+  $("#logged").hide();
+  $("#content").fadeIn();
+  
+}
+
+// funzione che nasconde il box login e fa vedere il box di loggato
+function show_logged(){
+  $("#logged").fadeIn();
 }
 
 //function che nasconde il box di login e fa vedere quello di registrazione
