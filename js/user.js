@@ -18,7 +18,7 @@ function login() {
         logout(_user.username);
         return false;
       });
-      console.log(JSON.parse(sessionStorage.getItem(username)));
+      // console.log(JSON.parse(sessionStorage.getItem(username)));
       $('#content').submit(function(){
           $(this).hide();
           show_logged();
@@ -41,7 +41,7 @@ function logout(username){
 
   $("#logged").hide();
   $("#content").fadeIn();
-  
+
 }
 
 // funzione che nasconde il box login e fa vedere il box di loggato
@@ -112,7 +112,7 @@ function isInLocal(username){
 function user(username, password){
   this.username = username;
   this.password = password;
-  this.balance = "100";
+  this.balance = ["100"];
 }
 
 //inserire la funzione isInLocal come metodo dell'oggetto user

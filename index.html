@@ -48,6 +48,21 @@
       <div class="content" id="logged" style="display:none;"></div>
     </div>
 
+    <script type="text/javascript">
+    // se un utente è loggato la pagina mostra le opzioni per utenti loggati
+       if (sessionStorage.length == 1) {
+         var username = Object.keys(sessionStorage).toString();
+         $("#content").hide();
+         $("#logged").html("<h2>Benvenuto, "+username+"!</h2>"+
+         " <input type='submit' id='btn_logged' value='Logout' >");
+         $("#btn_logged").click(function(){
+           logout(username);
+           return false;
+         });
+         $("#logged").show();
+       }
+    </script>
+
     <!-- secondo box contenente l'interfaccia per la registrazione, inizialmente nascosto -->
     <div class="box1" id="box_reg" style="display: none">
       <div class="content" id="content" >
@@ -145,8 +160,8 @@
     <div>
       &nbsp;
     </div>
-    <div class="box1">
-      <a href="http://www.xe.com/currencyconverter/">XE Currency Converter</a>
+    <div class="box1" style="display: none;">
+      
     </div>
 
     </div>
