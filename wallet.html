@@ -55,11 +55,11 @@
         <p>
           Scegli la tua valuta principale:
         </p>
-        <select class="currencies" id="curr_1">
+        <select class="currencies" id="curr_1_wall">
           <!-- carico le options e seleziono il valore di default -->
           <script type="text/javascript">
-            $("#curr_1").load("files/currencies.html", function(){
-              $("#curr_1").val("EUR");
+            $("#curr_1_wall").load("files/currencies.html", function(){
+              $("#curr_1_wall").val("EUR");
             });
           </script>
         </select>
@@ -75,10 +75,10 @@
         Quanti soldi convertire?
         <input type="text" name="amount" id="amount" required/>
         Seleziona la valuta:
-        <select class="currencies" id="curr_2">
+        <select class="currencies" id="curr_2_wall">
           <!-- carico le options e seleziono il valore di default -->
           <script type="text/javascript">
-          $("#curr_2").load("files/currencies.html");
+          $("#curr_2_wall").load("files/currencies.html");
           </script>
         </select>
         Effettua il cambio:

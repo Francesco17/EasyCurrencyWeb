@@ -80,7 +80,7 @@ function registration(){
     }
     else {
       // creo nuovo oggetto user e lo metto nel localStorage
-      user = new user(username, password);
+      user = new User(username, password);
       localStorage.setItem(user.username, JSON.stringify(user));
 
       alert(username+", la registrazione è avvenuta con successo!");
@@ -109,10 +109,11 @@ function isInLocal(username){
 }
 
 //definizione oggetto user
-function user(username, password){
+function User(username, password){
   this.username = username;
   this.password = password;
   this.balance = ['100'];
+  this.transaction = JSON.stringify({});
 
   // metodi:
   // seleziona l'ultimo elemento di balance, ossia l'ultimo saldo
