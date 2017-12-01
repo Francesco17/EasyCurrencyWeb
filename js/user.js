@@ -112,7 +112,13 @@ function isInLocal(username){
 function user(username, password){
   this.username = username;
   this.password = password;
-  this.balance = ["100"];
+  this.balance = ['100'];
+
+  // metodi:
+  // seleziona l'ultimo elemento di balance, ossia l'ultimo saldo
+  // function last(){
+  //   return this.balance[this.balance.lenght -1];
+  // }
 }
 
 //inserire la funzione isInLocal come metodo dell'oggetto user
