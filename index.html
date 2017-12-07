@@ -151,12 +151,27 @@
               </table>
             </div>
             <div style="background: inherit;">
-              <input type="submit" onclick="currencyconverter(); return false;" value="Converti" />
+              <input type="submit" id="converti" value="Converti" />
               <input type="submit" onclick="invert_curr(); return false;" value="Inverti" />
             </div>
           </div>
       </div>
     </div>
+
+    <script>
+
+    $( "#converti" ).click(function(){
+
+      var from = $("#curr_1").val();
+      var to = $("#curr_2").val();
+      var value = document.getElementById('val1').value;
+      currencyconverter(from, to, value, function(output){
+        document.getElementById('val2').value = output;
+      });
+    
+    });
+
+    </script>
 
     <div>
       &nbsp;
