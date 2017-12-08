@@ -122,6 +122,25 @@ function User(username, password){
   // }
 }
 
+// funzione per la transazione
+// function trans(value, currency, rate){
+//
+//   // devo sapere qual è l'ultima transazione
+//
+//   // var last_id = user.transaction[ Object.keys(user.transaction).sort().pop() ];
+//   if (last_id == "") {
+//     current_id_int = 1;
+//   }
+//   else {
+//     var current_id_int = parsInt(last_id)+1;
+//   }
+//   // costruisco l'oggetto json da appendere
+//   var data_obj = { current_id_int.toString(): { valore : value, valuta: currency, tasso: rate}};
+//
+// // la sintassi è extend(target, objects,..) dove target è un oggetto già esistente
+//   $.extend(user.transaction, data_obj);
+// }
+
 //inserire la funzione isInLocal come metodo dell'oggetto user
 
 //*******function to validate the form of currency converter*******************
