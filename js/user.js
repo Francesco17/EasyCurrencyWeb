@@ -123,23 +123,37 @@ function User(username, password){
 }
 
 // funzione per la transazione
-// function trans(value, currency, rate){
-//
-//   // devo sapere qual è l'ultima transazione
-//
-//   // var last_id = user.transaction[ Object.keys(user.transaction).sort().pop() ];
-//   if (last_id == "") {
-//     current_id_int = 1;
-//   }
-//   else {
-//     var current_id_int = parsInt(last_id)+1;
-//   }
-//   // costruisco l'oggetto json da appendere
-//   var data_obj = { current_id_int.toString(): { valore : value, valuta: currency, tasso: rate}};
-//
-// // la sintassi è extend(target, objects,..) dove target è un oggetto già esistente
-//   $.extend(user.transaction, data_obj);
-// }
+function trans(value, currency, rate){
+
+  // il controllo non lo faccio perchè trans viene chiamata solo da schermata dove lo user è loggato
+  // if (sessionStorage.length != 1) {
+  //     return false;
+  // }
+
+  var username = Object.keys(sessionStorage).toString();
+  _user = JSON.parse(sessionStorage.getItem(username));
+
+  // devo sapere qual è l'ultima transazione
+  // var last_id = _user.transaction[ Object.keys(_user.transaction).sort().pop()];
+  var last_id = _user.transaction;
+  console.log(_user.transaction);
+
+  var current_id_int, current_id_string;
+
+  if (last_id == "") {
+    current_id_int = 1;
+  }
+  else {
+    current_id_int = parseInt(last_id)+1;
+    current_id_string = current_id_int.toString();
+  }
+  // costruisco l'oggetto json da appendere
+  var data_obj = { current_id_string: { valore : value, valuta: currency, tasso: rate}};
+
+// la sintassi è extend(target, objects,..) dove target è un oggetto già esistente
+  $.extend(_user.transaction, data_obj);
+  console.log(_user.transaction);
+}
 
 //inserire la funzione isInLocal come metodo dell'oggetto user
 

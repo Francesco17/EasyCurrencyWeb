@@ -24,9 +24,6 @@
       </ul>
     </div>
 
-    <div>
-      &nbsp;
-    </div>
     <div class="box1" style="height:50px; padding: 10px; display: none;" id="not_logged">
       <div class="content" id="content">
         <p>
@@ -85,6 +82,23 @@
         <button style="height:30px;width:100px" value="cambio" id="change">Cambio</button>
       </div>
     </div>
+
+    <script type="text/javascript">
+      $("#change").click(function(){
+        console.log("change");
+        // devo prendere value, currency e rate
+        var value = document.getElementById("amount").value;
+        console.log(value);
+        var currency = $("#curr_2_wall").val();
+        console.log(currency);
+        var rate = 0.123;
+        console.log(rate);
+        trans(value, currency, rate);
+        console.log("funzione chiamata");
+        return false;
+
+      });
+    </script>
 
     <!-- aggiungo uno spazio tra i 2 div -->
     <div>
