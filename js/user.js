@@ -113,7 +113,7 @@ function User(username, password){
   this.username = username;
   this.password = password;
   this.balance = ['100'];
-  this.transaction = JSON.stringify({});
+  this.transaction = [];
 
   // metodi:
   // seleziona l'ultimo elemento di balance, ossia l'ultimo saldo
@@ -122,37 +122,56 @@ function User(username, password){
   // }
 }
 
+function prova(username){
+  _user = JSON.parse(sessionStorage.getItem(username));
+  // console.log(_user.transaction);
+
+  var data_obj = {id: 5, valuta: "EUR"};
+
+  var last_id = JSON.stringify(_user.transaction[_user.transaction.length-1]);
+  console.log("questo è il last_id "+last_id);
+// { valore : 23, valuta: "ARS", tasso: 0.123}
+// la sintassi è extend(target, objects,..) dove target è un oggetto già esistente
+  _user.transaction.push(data_obj);
+  sessionStorage.setItem(_user.username, JSON.stringify(_user));
+  localStorage.setItem(_user.username, JSON.stringify(_user));
+
+  console.log(_user.transaction[_user.transaction.length-1].id);
+  console.log(typeof(_user.transaction[_user.transaction.length-1].id));
+
+
+}
+
 // funzione per la transazione
-function trans(value, currency, rate){
+function trans(username, value, currency, rate){
 
-  // il controllo non lo faccio perchè trans viene chiamata solo da schermata dove lo user è loggato
-  // if (sessionStorage.length != 1) {
-  //     return false;
-  // }
-
-  var username = Object.keys(sessionStorage).toString();
   _user = JSON.parse(sessionStorage.getItem(username));
 
+  var last_el = _user.transaction[_user.transaction.length-1];
+  var current_id_int;
   // devo sapere qual è l'ultima transazione
-  // var last_id = _user.transaction[ Object.keys(_user.transaction).sort().pop()];
-  var last_id = _user.transaction;
-  console.log(_user.transaction);
+  // console.log(last_id);
+  // var last_id = last_obj.id;
 
-  var current_id_int, current_id_string;
-
-  if (last_id == "") {
+  if (last_el === undefined) {
     current_id_int = 1;
   }
   else {
+    console.log(last_id);
+    var last_id = last_el.id;
+
     current_id_int = parseInt(last_id)+1;
-    current_id_string = current_id_int.toString();
   }
   // costruisco l'oggetto json da appendere
-  var data_obj = { current_id_string: { valore : value, valuta: currency, tasso: rate}};
+  var data_obj = { id: current_id_int, valore: value, valuta: currency, tasso: rate};
 
-// la sintassi è extend(target, objects,..) dove target è un oggetto già esistente
-  $.extend(_user.transaction, data_obj);
-  console.log(_user.transaction);
+  _user.transaction.push(data_obj);
+  sessionStorage.setItem(_user.username, JSON.stringify(_user));
+  localStorage.setItem(_user.username, JSON.stringify(_user));
+
+ //la sintassi è extend(target, objects,..) dove target è un oggetto già esistente
+  // $.extend(_user.transaction, data_obj);
+  // console.log(_user.transaction);
 }
 
 //inserire la funzione isInLocal come metodo dell'oggetto user

@@ -56,7 +56,7 @@
           <!-- carico le options e seleziono il valore di default -->
           <script type="text/javascript">
             $("#curr_1_wall").load("files/currencies.html", function(){
-              $("#curr_1_wall").val("EUR");
+              $("#curr_1_wall").val("USD");
             });
           </script>
         </select>
@@ -85,17 +85,25 @@
 
     <script type="text/javascript">
       $("#change").click(function(){
-        console.log("change");
+        // console.log("change");
+        var username = Object.keys(sessionStorage).toString();
         // devo prendere value, currency e rate
         var value = document.getElementById("amount").value;
-        console.log(value);
+        // console.log(value);
         var currency = $("#curr_2_wall").val();
-        console.log(currency);
-        var rate = 0.123;
-        console.log(rate);
-        trans(value, currency, rate);
-        console.log("funzione chiamata");
-        return false;
+
+        var from = $("#curr_1_wall").val();
+        // console.log(currency);
+        var rate;
+        currencyconverter(from, currency, value, function(output){
+          rate = output/value;
+          // metto la transazione quando ho ricevuto i dati tramite callback
+          trans(username, value, currency, rate);
+        });
+        // console.log(rate);
+        // prova(username);
+
+        // console.log("funzione chiamata");
 
       });
     </script>
