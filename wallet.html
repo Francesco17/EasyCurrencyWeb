@@ -97,8 +97,9 @@
         var rate;
         currencyconverter(from, currency, value, function(output){
           rate = output/value;
-          // metto la transazione quando ho ricevuto i dati tramite callback
+          // metto la transazione nello storage quando ho ricevuto i dati tramite callback
           trans(username, value, currency, rate);
+          // prova(username);
         });
         // console.log(rate);
         // prova(username);
