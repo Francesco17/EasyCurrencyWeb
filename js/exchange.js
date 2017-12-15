@@ -20,7 +20,7 @@ $.ajax({
     success: function(json) {
 
       conversione = conversion(from, to, val1, json);
-      
+
       result(conversione);
     }
 
@@ -74,5 +74,25 @@ function invert_curr(){
   currencyconverter(from, to, value, function(output){
     document.getElementById('val2').value = output;
   });
+
+}
+
+function compute_rate(from, to, val1, val2){
+
+  source = "USD";
+  var rate;
+
+  if (from == source) {
+    rate = val2/val1;
+  }
+  else if (to == source) {
+    rate = val1/val2;
+  }
+  else {
+    // devo approfondire la fattibilità della triangolazione
+    rate = 1;
+  }
+
+  return rate;
 
 }
