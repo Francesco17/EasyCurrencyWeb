@@ -96,3 +96,15 @@ function compute_rate(from, to, val1, val2){
   return rate;
 
 }
+
+function compute_deposit(_user){
+
+  var len = _user.transaction.length;
+  var deposit = 0;
+
+  for(i = 0; i<len; i++){
+    deposit += Number(_user.transaction[i].valore);
+  }
+
+  return 100-deposit;
+}
