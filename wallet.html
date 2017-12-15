@@ -41,14 +41,24 @@
       <div class="content" id="content">
         <h1>Portafoglio</h1>
         <h3>Nome Utente: <script type="text/javascript">document.write(Object.keys(sessionStorage).toString());</script></h3>
-        <h3>Saldo:
+        <h3>Deposito:
+
           <script type="text/javascript">
             var username = Object.keys(sessionStorage).toString();
             _user = JSON.parse(sessionStorage.getItem(username));
             if (sessionStorage.length == 1) {
-              document.write(_user.balance[_user.balance.length -1]);
+              var deposit = compute_deposit(_user);
+              document.write(deposit);
+              // document.write(_user.balance[_user.balance.length -1]);
+              show_transactions(_user);
             }
-          </script></h3>
+          </script>
+        </h3>
+        <h3>Saldo:
+          <!-- <script type="text/javascript">
+            // TO DOOOOO
+          </script> -->
+        </h3>
         <p>
           Scegli la tua valuta principale:
         </p>
@@ -85,26 +95,21 @@
 
     <script type="text/javascript">
       $("#change").click(function(){
-        // console.log("change");
+
         var username = Object.keys(sessionStorage).toString();
         // devo prendere value, currency e rate
         var value = document.getElementById("amount").value;
-        // console.log(value);
         var currency = $("#curr_2_wall").val();
 
         var from = $("#curr_1_wall").val();
-        // console.log(currency);
         var rate;
         currencyconverter(from, currency, value, function(output){
-          rate = output/value;
+          // prelevo il tasso di cambio
+          rate = compute_rate(from, currency, value, output);
           // metto la transazione nello storage quando ho ricevuto i dati tramite callback
           trans(username, value, currency, rate);
-          // prova(username);
+          // $("#box_change").fadeOut();
         });
-        // console.log(rate);
-        // prova(username);
-
-        // console.log("funzione chiamata");
 
       });
     </script>

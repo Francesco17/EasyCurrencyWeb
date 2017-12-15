@@ -108,3 +108,16 @@ function compute_deposit(_user){
 
   return 100-deposit;
 }
+
+function show_transactions(_user){
+
+  var len = _user.transaction.length;
+  var obj = _user.transaction;
+  var divs = [];
+
+  for(i=0; i<len; i++){
+    $("#box_logged").append("<h3 style='padding-left:10px;'>Transazione "+obj[i].id+" : hai cambiato "+obj[i].valore+" in "+obj[i].valuta+" </h3>");
+    // divs[i] = "<h3 style='padding-left:10px;'>Transazione "+obj[i].id+" : hai cambiato "+obj[i].valore+" in "+obj[i].valuta+" </h3>";
+  }
+
+}
