@@ -5,6 +5,7 @@ function currencyconverter(from, to, val1, result){
 endpoint = 'live'
 access_key = 'cdaa48c0799e268d91b98681529912eb'; //36ed860ff64b5e9961d86f10bc053a6f finito il piano
 source = "USD";
+currencies = from+","+to;
 
 // valore da convertire
 var conversione;
@@ -15,7 +16,7 @@ if (val1 == '') {
 
 // eseguo la chiamata ajax alle api
 $.ajax({
-    url: 'http://apilayer.net/api/' + endpoint + '?access_key=' + access_key + '&source='+ source,
+    url: 'http://apilayer.net/api/' + endpoint + '?access_key=' + access_key + '&source='+ source + '&currencies='+ currencies,
     dataType: 'jsonp',
     success: function(json) {
 
