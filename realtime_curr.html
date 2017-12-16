@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/style.css">
 <script type="text/javascript" src="js/user.js"></script>
-<script type="text/javascript" src="js/exchange.js"></script>
+<script type="text/javascript" src="js/cambistorici.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <head>
 <title>Analisi Finanziaria</title>
@@ -29,21 +29,129 @@
       &nbsp;
     </div>
     <!-- box contentente i vari bottoni che al click cambiano il contenuto del box successivo -->
-    <div class="box1" style="height: auto; text-align:center; padding: 10px">
+    <div class="box1" style="height: auto; text-align:center; padding: 10px" id="bottoni">
       <div class="content" id="content">
-          <button style="height:30px;width:100px" value="grafico">Grafico</button>
-          <button style="height:30px;width:100px" value="grafico">Matrice</button>
+          <button style="height:30px;" value="grafico">Cambio valuta storica</button>
+          <button style="height:30px;" value="grafico">Cambi valute live</button>
       </div>
     </div>
 
-    <div>
+    <div class="box1" style="height:50px; padding: 10px; display: none;" id="not_logged">
+      <div class="content" id="content">
+        <p>
+          Se vuoi accedere alla funzionalità valute devi effettuare il login..
+        </p>
+      </div>
+    </div>
+
+
+    <!-- box contentente il convertitore di valute, l'altezza è fissata -->
+    <div class="box1" style="height: auto" id="box_storico">
+      <div class="content" id="content">
+          <h2>Conversione storica di valute e criptovalute</h2>
+          <p>Strumento semplice per convertire valute/criptovalute, nei principali cambi</p>
+          <p>Scegli la valuta base, la valuta di destinazione della conversione e la data storica
+          in cui effettuare il cambio.</p>
+          <div class="flex-container">
+            <div>
+              <!-- organizzo il contenuto in una tabella -->
+              <table class="table1">
+                <tr>
+                  <td>
+                    Seleziona una valuta:
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <select class="currencies" id="curr_1">
+                      <!-- carico le options e seleziono il valore di default -->
+                      <script type="text/javascript">
+                      $("#curr_1").load("files/currencies.html", function(){
+                        $("#curr_1").val("EUR");
+                      });
+                      </script>
+                    </select>
+                  </td>
+                </tr>
+                <div>
+                  &nbsp;
+                </div>
+                <tr>
+                  <td>
+                    <input type="text" id="val1" name="val1" size="19"/>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div>
+              <table class="table1">
+                <tr>
+                  <td>
+                    Seleziona una valuta:
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <select class="currencies" id="curr_2">
+                      <script type="text/javascript">
+                      $("#curr_2").load("files/currencies.html", function(){
+                        $("#curr_2").val("USD");
+                      });
+                      </script>
+                    </select>
+                  </td>
+                </tr>
+                <div>
+                  &nbsp;
+                </div>
+                <tr>
+                  <td>
+                    <input type="text" id="val2" name="val2" size="19"/>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div style="background: inherit;">
+              In quale data?
+              <input id="giorno" type="date"  value="2017-01-01" min="2010-01-01"/>
+              <script type="text/javascript">
+            		var today = new Date();
+            		var dd = today.getDate();
+            		var mm = today.getMonth()+1; //zero è gennaio
+            		var yyyy = today.getFullYear();
+            		if(dd<10) {dd='0'+dd}
+            		if(mm<10) {mm='0'+mm}
+            		today = yyyy+'-'+mm+'-'+dd;
+            		document.getElementById("giorno").setAttribute("max", today);
+              </script>
+              <br />
+              <p></p>
+              <input type="submit" onclick="currencyconverter(); return false;" value="Converti" />
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <!-- <div>
       &nbsp;
     </div>
     <div class="box1" style="height:500px; padding: 10px">
       <div class="content" id="content">
         qua fai il display della matrice e del grafico e poi li colleghi ai bottoni
       </div>
-    </div>
+    </div> -->
+    <script type="text/javascript">
+    // se l'utente non è loggato, non accede alla feature portafoglio.
+       if (sessionStorage.length != 1) {
+         // faccio il display di un messaggio di errore
+         $("#not_logged").show();
+         $("#box_storico").hide();
+         $("#bottoni").hide();
+       }
+       else {
+         $("#not_logged").hide();
+       }
+    </script>
 
   </div>
 
