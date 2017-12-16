@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="css/style.css">
+<script type="text/javascript" src="js/user.js"></script>
+<script type="text/javascript" src="js/exchange.js"></script>
+
+
+<head>
+	<title>Valute in tempo reale (AJAX)</title>
+
+	<script src="libraries/plotly-latest.min.js"></script>
+
+	<!--calendario Epoch-->
+	<link rel="stylesheet" type="text/css" href="libraries/epochprime_styles.css" />
+	<script type="text/javascript" src="libraries/epochprime_modificata.js"></script>
+	<script type="text/javascript">
+		var inizioGrafico, fineGrafico;
+		window.onload = function () {
+			var config_xml = '<configs><initcfg><name>bas_cal<\/name><mode>flat<\/mode><multiselect>no<\/multiselect><\/initcfg><\/configs>';
+			inizioGrafico = new EpochPrime(document.getElementById('inizioGrafico'),config_xml);
+		};
+	</script>
+
+
+		<script>
+			function funzionetest() {
+				$("#toccoBandiera").hide();
+				$("#toccoBandiera").show();
+				var stampa = currencyconverter();
+				console.log(stampa);
+				document.getElementById("toccoBandiera").innerHTML = stampa;
+				}
+
+			/*
+
+			$(".bandiere").mouseover();
+
+				var quantebandiere = document.getElementsByClassName("bandiere");
+			for (var i = 0; i < quantebandiere.length; i++) {
+				quantebandiere[i].onmouseover = aggiornaValuta ;}
+			function aggiornaValuta(e) {
+				// if (e.target.readyState == 4 && e.target.status == 200)
+
+				console.log("funziona");
+
+			}
+			*/
+		</script>
+
+
+	<style>
+		header, footer {
+    			padding: 1em;
+    			clear: left;
+    			text-align: center;}
+		selezioneValute {
+    			float: left;
+    			max-width: 160px;
+    			margin: 0;
+    			padding: 1em;}
+		selezioneValute ul { list-style-type: none; padding: 0; }
+   		selezioneValute ul a { text-decoration: none; }
+		bandiere {
+    			margin-left: 111px;
+    			border-left: 1px solid blue;
+    			padding: 1em;
+    			overflow: hidden;}
+	</style>
+
+</head>
+
+
+<body>
+	<div class="contenitore">
+
+	<header>
+		<div class="nav">
+		<ul>
+        		<li class="logo"><a href="index.html">PROGETTO</a></li>
+        		<li class="home"><a href="index.html">Home</a></li>
+        		<li class="currencies-page"><a class="active" href="#">Currencies</a></li>
+       			<!--<li class="about"><a href="#">About</a></li>-->
+        		<li class="contacts"><a href="contacts.html">Contacts</a></li>
+        		<li class="about"><a href="aboutus.html">About us</a></li>
+      		</ul>
+    		</div>
+	</header>
+
+	<selezioneValute>
+	<ul>
+   		<li>VALUTA BASE</li>
+			<input type="text" id="val1" name="val1"  size="14" value="1"/>
+			<select class="currencies" id="curr_1">
+                      		<script>
+				$("#curr_1").load("files/currencies.html",
+					function(){
+                        			$("#curr_1").val("EUR");	<!-- EURO valore di default -->
+                      			});
+                      		</script>
+                    	</select>
+   		<li>CONVERSIONE</li>
+		<input type="text" id="val2" name="val2" size="14"/>
+		<hr/>
+<!-- tendine selezione valute -->
+			<select class="currencies" id="curr_2">
+                      		<script>
+				$("#curr_2").load("files/currencies.html",
+					function(){
+                        			$("#curr_2").val("USD");
+                      			});
+                      		</script>
+                    	</select>
+			<select class="currencies" id="curr_3">
+                      		<script>
+				$("#curr_3").load("files/currencies.html",
+					function(){
+                        			$("#curr_3").val("JPY");
+                      			});
+                      		</script>
+                    	</select>
+   		<li>TENDINA</li>
+   		<li>TENDINA</li>
+   		<li>TENDINA</li>
+   		<li>TENDINA</li>
+		<br>
+		torna al tuo
+		<button>portafoglio</button>
+
+	</ul>
+	</selezioneValute>
+
+	<script>
+		function convertiIn() {
+			curr_2="usd";
+			currencyconverter();
+			return false;
+		}
+	</script>
+
+	<bandiere>
+		<form>
+
+		<img onmouseover="funzionetest();" class="bandiere" id="usd" type="image" src="currency-flags/src/flags/usd.png" width="192" height="128" onclick="currencyconverter(); return false;" value="Converti" />
+
+		<input class="bandiere" id="usd" type="image" src="currency-flags/src/flags/usd.png" width="192" height="128" onclick="currencyconverter(); return false;" value="Converti" />
+		<input class="bandiere" type="image" src="currency-flags/src/flags/jpy.png" width="192" height="128">
+		<input class="bandiere" name="eur" type="image" src="currency-flags/src/flags/eur.png"  width="192" height="128">
+
+		<input type="image" src="currency-flags/src/flags/usd.png" width="192" height="128">
+		<input type="image" src="currency-flags/src/flags/jpy.png" alt="Submit" width="192" height="128">
+		<input type="image" src="currency-flags/src/flags/usd.png" alt="Submit" width="192" height="128">
+		<input type="image" src="currency-flags/src/flags/jpy.png" alt="Submit" width="192" height="128">
+		<input type="image" src="currency-flags/src/flags/usd.png" alt="Submit" width="192" height="128">
+		<input type="image" src="currency-flags/src/flags/jpy.png" alt="Submit" width="192" height="128">
+		</form>
+
+		<h1>
+<!-- ZONA DINAMICA -->
+		<div id="toccoBandiera">
+			VALORE INIZIALE
+	      	</div>
+		</h1>
+
+	</bandiere>
+
+
+	<footer>
+	<div id="" style="width:999px;height:333px;"></div>
+		<!-- ZONA DINAMICA 2 -->1
+      	</div>
+	</footer>
+
+</div>
+</body>
+
+</html>
