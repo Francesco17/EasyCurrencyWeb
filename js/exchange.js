@@ -109,13 +109,13 @@ function compute_deposit(_user){
   return 100-deposit;
 }
 
-function compute_balance(_user, deposit){
+function compute_balance(_user){
 
   var len = _user.transaction.length;
   var obj = _user.transaction;
   var source = "USD";
   var combine;
-  var balance = deposit;
+  var balance = compute_deposit(_user);
   var old_conversion;
 
   if (len != 0) {
@@ -129,7 +129,7 @@ function compute_balance(_user, deposit){
 
       }
 
-      $('#balance').html('Saldo: '+balance);
+      $('#balance').html('Saldo: '+balance+" "+_user.base_currency);
       return false;
 
     });
@@ -151,18 +151,5 @@ function rates_call_for_transactions(){
           url: 'http://apilayer.net/api/' + endpoint + '?access_key=' + access_key + '&source='+ source,
           dataType: 'jsonp',
           });
-
-}
-
-function show_transactions(_user){
-
-  var len = _user.transaction.length;
-  var obj = _user.transaction;
-  // var divs = [];
-
-  for(i=0; i<len; i++){
-    $("#box_logged").append("<h3 style='padding-left:10px;'>Transazione "+obj[i].id+" : hai cambiato "+obj[i].valore+" in "+obj[i].valuta+" </h3>");
-    // divs[i] = "<h3 style='padding-left:10px;'>Transazione "+obj[i].id+" : hai cambiato "+obj[i].valore+" in "+obj[i].valuta+" </h3>";
-  }
 
 }

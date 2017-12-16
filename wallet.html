@@ -48,39 +48,36 @@
             _user = JSON.parse(sessionStorage.getItem(username));
             if (sessionStorage.length == 1) {
               var deposit = compute_deposit(_user);
-              // var balance = compute_balance(_user, deposit);
-              document.write(deposit);
-              // document.write(_user.balance[_user.balance.length -1]);
+              document.write(deposit+" "+_user.base_currency);
               show_transactions(_user);
             }
           </script>
+
         </h3>
         <h3 id="balance"> Saldo:
+
           <script type="text/javascript">
             var username = Object.keys(sessionStorage).toString();
             _user = JSON.parse(sessionStorage.getItem(username));
             if (sessionStorage.length == 1) {
-              var deposit = compute_deposit(_user);
-              var balance = compute_balance(_user, deposit);
-              document.write(balance);
-              // document.write(_user.balance[_user.balance.length -1]);
-              // show_transactions(_user);
+              var balance = compute_balance(_user);
+              document.write(balance+" "+_user.base_currency);
             }
           </script>
+
         </h3>
         <button id="update_saldo">Aggiorna Saldo</button>
         <button id="update_transactions">Aggiorna Transazioni</button>
-        <p>
-          Scegli la tua valuta principale:
-        </p>
-        <select class="currencies" id="curr_1_wall">
-          <!-- carico le options e seleziono il valore di default -->
-          <script type="text/javascript">
-            $("#curr_1_wall").load("files/currencies.html", function(){
-              $("#curr_1_wall").val("USD");
+
+        <script type="text/javascript">
+          var username = Object.keys(sessionStorage).toString();
+          _user = JSON.parse(sessionStorage.getItem(username));
+          if (sessionStorage.length == 1) {
+            $('#update_saldo').click(function (){
+              compute_balance(_user);
             });
-          </script>
-        </select>
+          }
+        </script>
       </div>
     </div>
 
@@ -108,11 +105,12 @@
       $("#change").click(function(){
 
         var username = Object.keys(sessionStorage).toString();
+        _user = JSON.parse(sessionStorage.getItem(username));
         // devo prendere value, currency e rate
         var value = document.getElementById("amount").value;
         var currency = $("#curr_2_wall").val();
 
-        var from = $("#curr_1_wall").val();
+        var from = _user.base_currency;
         var rate;
         currencyconverter(from, currency, value, function(output){
           // prelevo il tasso di cambio

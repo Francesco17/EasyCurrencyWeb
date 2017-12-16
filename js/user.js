@@ -66,9 +66,12 @@ function registration(){
   var x = document.forms["form_reg"];
   var username = "";
   var password = "";
+  var base_currency = "";
+
   for (var i = 0; i < x.length-1; i++) {
       username = x.elements[0].value;
       password = x.elements[1].value;
+      base_currency = x.elements[2].value;
   }
   // verifico che il localStorage sia supportato dal browser
   if (localStorage) {
@@ -80,7 +83,7 @@ function registration(){
     }
     else {
       // creo nuovo oggetto user e lo metto nel localStorage
-      user = new User(username, password);
+      user = new User(username, password, base_currency);
       localStorage.setItem(user.username, JSON.stringify(user));
 
       alert(username+", la registrazione è avvenuta con successo!");
@@ -109,17 +112,12 @@ function isInLocal(username){
 }
 
 //definizione oggetto user
-function User(username, password){
+function User(username, password, base_currency){
   this.username = username;
   this.password = password;
+  this.base_currency = base_currency;
   this.balance = ['100'];
   this.transaction = [];
-
-  // metodi:
-  // seleziona l'ultimo elemento di balance, ossia l'ultimo saldo
-  // function last(){
-  //   return this.balance[this.balance.lenght -1];
-  // }
 }
 
 // funzione per la transazione
@@ -146,6 +144,35 @@ function trans(username, value, currency, rate){
   localStorage.setItem(_user.username, JSON.stringify(_user));
 
 }
+
+function show_transactions(_user){
+
+  var len = _user.transaction.length;
+  var obj = _user.transaction;
+  // var divs = [];
+
+  for(i=0; i<len; i++){
+    $("#box_logged").append("<h3 style='padding-left:10px;'>Transazione "+obj[i].id+" : hai cambiato "+obj[i].valore+" "+
+    _user.base_currency+" in "+obj[i].valore*obj[i].tasso+" "+obj[i].valuta+" </h3>");
+    // divs[i] = "<h3 style='padding-left:10px;'>Transazione "+obj[i].id+" : hai cambiato "+obj[i].valore+" in "+obj[i].valuta+" </h3>";
+  }
+
+}
+
+// function delete_trans(_user, id){
+//
+//   var len = _user.transaction.length;
+//   var obj = _user.transaction;
+//
+//
+//   if (len != 0) {
+//
+//   }
+//   else {
+//
+//   }
+//
+// }
 
 //inserire la funzione isInLocal come metodo dell'oggetto user
 

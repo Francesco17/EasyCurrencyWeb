@@ -76,10 +76,21 @@
             <input type="text" name="username" id="uname" required><br />
             Password:<br />
             <input type="password" name="password" id="passw" required><br />
-            <p></p>
+            <p>
+              Scegli la tua valuta principale:
+              <select class="currencies" id="curr_1_wall">
+                <!-- carico le options e seleziono il valore di default -->
+                <script type="text/javascript">
+                  $("#curr_1_wall").load("files/currencies.html", function(){
+                    $("#curr_1_wall").val("USD");
+                  });
+                </script>
+              </select>
+            </p>
             <input type="submit" value="Registrami">
             <!-- al click chiama la funzione hide_reg -->
             <input type="submit" value="Annulla" onclick="hide_reg(); return false;"></button>
+            &nbsp;
           </form>
         </div>
 
