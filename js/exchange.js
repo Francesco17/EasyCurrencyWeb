@@ -3,7 +3,7 @@ function currencyconverter(from, to, val1, result){
 
 // definisco risorsa, access key e sorgente
 endpoint = 'live'
-access_key = '36ed860ff64b5e9961d86f10bc053a6f';
+access_key = 'cdaa48c0799e268d91b98681529912eb'; //36ed860ff64b5e9961d86f10bc053a6f finito il piano
 source = "USD";
 
 // valore da convertire
@@ -144,7 +144,7 @@ function compute_balance(_user){
 function rates_call_for_transactions(){
 
   endpoint = 'live'
-  access_key = '36ed860ff64b5e9961d86f10bc053a6f';
+  access_key = 'cdaa48c0799e268d91b98681529912eb';
   source = "USD";
 
   return $.ajax({

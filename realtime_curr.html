@@ -203,13 +203,14 @@
          $("#box_storico").show();
 
          $("#live").click(function(){
-           $("#box_storico").fadeOut();
            $("#bandiere").fadeIn();
+           $("#box_storico").fadeOut();
          });
 
          $("#storica").click(function(){
            $("#box_storico").fadeIn();
            $("#bandiere").fadeOut();
+           $("#zonaDinamica").hide();
          });
 
        }
