@@ -109,11 +109,56 @@ function compute_deposit(_user){
   return 100-deposit;
 }
 
+function compute_balance(_user, deposit){
+
+  var len = _user.transaction.length;
+  var obj = _user.transaction;
+  var source = "USD";
+  var combine;
+  var balance = deposit;
+  var old_conversion;
+
+  if (len != 0) {
+
+    rates_call_for_transactions().done(function(rates){
+
+      for(i=0; i<len; i++){
+        old_conversion = Number(obj[i].valore * obj[i].tasso);
+        combine = source+obj[i].valuta;
+        balance += Number(old_conversion/rates.quotes[combine]);
+
+      }
+
+      $('#balance').html('Saldo: '+balance);
+      return false;
+
+    });
+
+  }
+  else {
+    return balance;
+  }
+
+}
+
+function rates_call_for_transactions(){
+
+  endpoint = 'live'
+  access_key = '36ed860ff64b5e9961d86f10bc053a6f';
+  source = "USD";
+
+  return $.ajax({
+          url: 'http://apilayer.net/api/' + endpoint + '?access_key=' + access_key + '&source='+ source,
+          dataType: 'jsonp',
+          });
+
+}
+
 function show_transactions(_user){
 
   var len = _user.transaction.length;
   var obj = _user.transaction;
-  var divs = [];
+  // var divs = [];
 
   for(i=0; i<len; i++){
     $("#box_logged").append("<h3 style='padding-left:10px;'>Transazione "+obj[i].id+" : hai cambiato "+obj[i].valore+" in "+obj[i].valuta+" </h3>");
