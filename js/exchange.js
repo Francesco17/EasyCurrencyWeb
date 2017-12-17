@@ -114,6 +114,7 @@ function compute_balance(_user){
 
   var len = _user.transaction.length;
   var obj = _user.transaction;
+  var old_balance = _user.balance[_user.balance.length-1];
   var source = "USD";
   var combine;
   var balance = compute_deposit(_user);
@@ -131,6 +132,13 @@ function compute_balance(_user){
       }
 
       $('#balance').html('Saldo: '+balance+" "+_user.base_currency);
+
+      if (old_balance != balance) {
+        _user.balance.push(balance);
+        sessionStorage.setItem(_user.username, JSON.stringify(_user));
+        localStorage.setItem(_user.username, JSON.stringify(_user));
+      }
+
       return false;
 
     });

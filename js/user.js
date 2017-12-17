@@ -116,7 +116,7 @@ function User(username, password, base_currency){
   this.username = username;
   this.password = password;
   this.base_currency = base_currency;
-  this.balance = ['100'];
+  this.balance = [100];
   this.transaction = [];
 }
 
