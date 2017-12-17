@@ -90,6 +90,7 @@
         <p style="padding:5px;">
           Seleziona la data di riferimento per i tassi di cambio:
           <input id="giorno" type="date" min="2010-01-01"/>
+          e fai click una volta sulla bandiera della tua della valuta base.
           <script type="text/javascript">
             var today = new Date();
             var dd = today.getDate();
@@ -145,6 +146,7 @@
   		$(document).ready(function(){
   		  $(".bandiere").mouseover(function(){
   				to = $(this).attr("id");
+          title = $(this).attr("title");
   	//			val1 = $(#val1).attr("value");
   				date = document.getElementById("giorno").value;;
           var converti
@@ -155,7 +157,7 @@
             // console.log(typeof(converti));
 
             $("#zonaDinamica").fadeIn();
-            var stampavaluta = "il "+date+": "+val1+" "+from+" equivale a "+converti+" "+ $(".bandiere").attr("title")+" ("+to+")";
+            var stampavaluta = "il "+date+": "+val1+" "+from+" equivale a "+converti+" "+ title+" ("+to+")";
             $("#zonaDinamica").text(stampavaluta);
           });
 
@@ -176,19 +178,68 @@
   	//	jQuery: DOPPIO CLICK SU BANDIERA
   		$(document).ready(function(){
   			$(".bandiere").dblclick(function(){
-  				window.open();
-  				alert("window.open() apre popup con grafico");
+          
+          to = $(this).val();
+          var ascisse = Number($("#ascisse").val());
+          console.log(from+"-"+to);
+          var passo = Number($("#passo").val());
+          // console.log("num passo --> "+passo);
+
+          var dateAsseX = [];
+          var valoriAsseY = [];
+
+          const millgiorno = 86400000;  // millisecondi in un giorno
+          var date = new Date(document.getElementById("giorno-grafico").value);
+          date_mill = date.getTime();
+          // console.log("init del date mill "+date_mill);
+          dateAsseX[0] = document.getElementById("giorno-grafico").value;
+
+          for (let i = 0; i < ascisse; i++) {
+            date_mill += millgiorno*passo;
+            date = new Date(date_mill);
+            dateAsseX[i] = date.toISOString();
+            dateAsseX[i] = dateAsseX[i].substring(NaN,10);
+            // chiamata bloccante
+            valoriAsseY[i] = currency_graph(from, to, 1, dateAsseX[i]);
+          }
+
+          var data = [{
+                      x: dateAsseX,
+                      y: valoriAsseY,
+                      type: 'scatter'
+                      }];
+
+          Plotly.newPlot('GraficoStoricoValuta', data);
+        });
+
+          // popup del grafico
+  				// window.open();
+  				// alert("window.open() apre popup con grafico");
   			});
-  		});
   	</script>
 
     <div>
     &nbsp;
     </div>
-    <div class="box1" id="zonaDinamica" style="height:50px; padding: 10px; display: none;">
+    <div class="box1" id="zonaDinamica" style="height:auto; padding: 10px; display: none;">
       <div class="content" id="content">
 
       </div>
+    </div>
+
+    <div>
+      &nbsp;
+    </div>
+
+    <div class="box1" id="input-grafico" style="height:auto; padding: 10px;">
+      da quale data?<br />
+      <input id="giorno-grafico" type="date"  value="2017-01-01" min="2010-01-01"/><br />
+      quanti valori sulle ascisse?<br />
+      <input id="ascisse" type="number" value="4" min="2" max="31"/><br />
+      e con quale passo?<br />
+      <input id="passo" type="number"  value="1" min="1" /><br />
+      <button id="grafico">Grafico</button>
+
     </div>
 
 
@@ -292,6 +343,12 @@
       });
     </script>
 
+    <div id="GraficoStoricoValuta" style="height:auto; width: auto;"></div>
+<!--
+    // var from = $("#curr_1").val();
+    // var to = $("#curr_2").val();
+    // var val1 = document.getElementById('val1').value; -->
+
 
     <script type="text/javascript">
     // se l'utente non è loggato, non accede alla feature portafoglio.
@@ -301,17 +358,20 @@
          $("#bottoni").hide();
          $("#bandiere").hide();
          $("#box_storico").hide();
+         $("#input-grafico").hide();
        }
        else {
 
          $("#not_logged").hide();
          $("#bottoni").show();
          $("#bandiere").hide();
+         $("#input-grafico").hide();
          $("#box_storico").show();
 
          $("#live").click(function(){
            $("#imposta_data").fadeIn();
            $("#bandiere").fadeIn();
+           $("#input-grafico").fadeIn();
            $("#box_storico").hide();
          });
 
