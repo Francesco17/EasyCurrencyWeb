@@ -13,21 +13,6 @@
 	val1 = 1;
 	date = "2017-01-01";
 
-// mio
-  // $(document).ready(function() {
-  //
-  //   $.get("files/currencies.html", function (data){
-  //
-  //     var Costruttore_HTML_img_Bandiere = ""
-  //     for (var i = 0; i < data.length; i++) {
-  //       console.log(data.length);
-  //     }
-  //
-  //
-  //   });
-  //
-  // });
-
 // suo
 
 // 	// genero HTML bandierine
@@ -164,7 +149,7 @@
   				var stampavaluta = "il "+date+" "+val1+" "+from+" equivale a "+converti+" "+ $(this).attr("title")+" ("+to+")";
   				$("#zonaDinamica").text(stampavaluta);
   			});
-  			$(".bandiere").mouseleave(function(){ $("#zonaDinamica").fadeOut(); })
+  			$(".bandiere").mouseleave(function(){ $("#zonaDinamica").fadeOut(); });
   		});
 
 
@@ -191,7 +176,7 @@
     </div>
     <div class="box1" id="zonaDinamica" style="height:50px; padding: 10px; display: none;">
       <div class="content" id="content">
-        
+
       </div>
     </div>
 

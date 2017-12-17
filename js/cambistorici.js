@@ -9,7 +9,7 @@ function currencyconverter(){
 
 
 endpoint = 'historical';
-access_key = '36ed860ff64b5e9961d86f10bc053a6f';
+access_key = 'cdaa48c0799e268d91b98681529912eb';
 source = "USD";
 
 
@@ -63,31 +63,46 @@ $.ajax({
 }
 
 // funzione chiamata al click del bottone "converti"
-function currency_graph(from, to, val1, date, result){
+function currency_graph(from, to, val1, date){
 
 // definisco risorsa, access key e sorgente
 endpoint = 'historical'
-access_key = '36ed860ff64b5e9961d86f10bc053a6f';
+access_key = 'cdaa48c0799e268d91b98681529912eb';
 source = "USD";
+url = 'http://apilayer.net/api/' + endpoint + '?access_key=' + access_key + '&date=' + date + '&source='+ source + '&currencies='+ to;
 
 var conversione;
 if (val1 == '') { return false; }
 
 // valore da convertire
 
-console.log(from+to+val1+date);
+// console.log(from+to+val1+date);
 // eseguo la chiamata ajax alle api
-$.ajax({
-    url: 'http://apilayer.net/api/' + endpoint + '?access_key=' + access_key + '&date=' + date + '&source='+ source + '&currencies='+ to,
-    dataType: 'jsonp',
-    success: function(json) {
 
-      conversione = conversion(from, to, val1, json);
+var xhttp = new XMLHttpRequest();
+xhttp.open("GET", url, false);
+xhttp.send();
+if (xhttp.status == 200) {
 
-      result(conversione);
-    }
+  var json = JSON.parse(xhttp.responseText);
+  var risultato = conversion(from, to, 1, json);
+  return risultato;
+}
 
-  });
+
+
+// $.ajax({
+//     url: 'http://apilayer.net/api/' + endpoint + '?access_key=' + access_key + '&date=' + date + '&source='+ source + '&currencies='+ to,
+//     dataType: 'jsonp',
+//     success: function(json) {
+//
+//       conversione = conversion(from, to, val1, json);
+//
+//       result(conversione);
+//
+//     }
+//
+//   });
 }
 
 function conversion(from, to, value, json){
