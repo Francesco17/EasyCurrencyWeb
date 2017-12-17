@@ -77,7 +77,7 @@
       </div>
     </div>
 
-    <div class="box1" style="height:50px; padding: 10px; display: none;" id="not_logged">
+    <div class="box1" style="height:50px; padding: 10px; display: inherit;" id="not_logged">
       <div class="content" id="content">
         <p>
           Se vuoi accedere alla funzionalità valute devi effettuare il login..
@@ -85,20 +85,26 @@
       </div>
     </div>
 
-    <!-- <script>
-      function funzionetest() {
-
-        $("#zonaDinamica").show();
-        // var stampa = currencyconverter();
-        // console.log(stampa);
-        var titolo = $('img', this).attr('title');
-        document.getElementById("zonaDinamica").innerHTML = titolo;
-        }
-    </script> -->
-
-    <div>
-      &nbsp;
+    <div class="box1" id="imposta_data" style="display: none;">
+      <div class="content" id="content">
+        <p style="padding:5px;">
+          Seleziona la data di riferimento per i tassi di cambio:
+          <input id="giorno" type="date" min="2010-01-01"/>
+          <script type="text/javascript">
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //zero è gennaio
+            var yyyy = today.getFullYear();
+            if(dd<10) {dd='0'+dd}
+            if(mm<10) {mm='0'+mm}
+            today = yyyy+'-'+mm+'-'+dd;
+            document.getElementById("giorno").setAttribute("max", today);
+            document.getElementById("giorno").setAttribute("value", today);
+          </script>
+        </p>
+      </div>
     </div>
+
     <div class="box1" id="bandiere" style="text-align:center; height:auto; padding: 10px">
       <div class="content" id="content">
         <img id='USD' src="currency-flags/src/flags/usd.png" class="bandiere" width="10%" title='United States Dollar' />
@@ -138,16 +144,21 @@
 
   		$(document).ready(function(){
   		  $(".bandiere").mouseover(function(){
-  				to = $(this).attr("value");
+  				to = $(this).attr("id");
   	//			val1 = $(#val1).attr("value");
-  	//			date = $(#giorno).attr("value");
-  				converti = 999; // valore base per i test di controllo
-  	  		// currency_graph(from, to, val1, date, function(val2){
-  	  		// 	converti=val2;
-  	  		// 	console.log("valore "+converti); });
-  	      $("#zonaDinamica").fadeIn();
-  				var stampavaluta = "il "+date+" "+val1+" "+from+" equivale a "+converti+" "+ $(this).attr("title")+" ("+to+")";
-  				$("#zonaDinamica").text(stampavaluta);
+  				date = document.getElementById("giorno").value;;
+          var converti
+  				// converti = 999; // valore base per i test di controllo
+  	  		currencyconverter(from, to, val1, date, function(val2){
+  	  			converti=val2.toString();
+  	  			// console.log("valore "+converti);
+            // console.log(typeof(converti));
+
+            $("#zonaDinamica").fadeIn();
+            var stampavaluta = "il "+date+": "+val1+" "+from+" equivale a "+converti+" "+ $(".bandiere").attr("title")+" ("+to+")";
+            $("#zonaDinamica").text(stampavaluta);
+          });
+
   			});
   			$(".bandiere").mouseleave(function(){ $("#zonaDinamica").fadeOut(); });
   		});
@@ -249,7 +260,7 @@
             </div>
             <div style="background: inherit;">
               In quale data?
-              <input id="giorno" type="date"  value="2017-01-01" min="2010-01-01"/>
+              <input id="giorno-storico" type="date"  value="2017-01-01" min="2010-01-01"/>
               <script type="text/javascript">
             		var today = new Date();
             		var dd = today.getDate();
@@ -258,15 +269,28 @@
             		if(dd<10) {dd='0'+dd}
             		if(mm<10) {mm='0'+mm}
             		today = yyyy+'-'+mm+'-'+dd;
-            		document.getElementById("giorno").setAttribute("max", today);
+            		document.getElementById("giorno-storico").setAttribute("max", today);
               </script>
               <br />
               <p></p>
-              <input type="submit" onclick="currencyconverter(); return false;" value="Converti" />
+              <input type="submit" id="converti" value="Converti" />
             </div>
           </div>
       </div>
     </div>
+
+    <script>
+      $("#converti").click(function(){
+        var from = document.getElementById("curr_1").options[document.getElementById("curr_1").selectedIndex].value;
+        var to = document.getElementById("curr_2").options[document.getElementById("curr_2").selectedIndex].value;
+        var val1 = document.getElementById('val1').value;
+        var date = document.getElementById("giorno-storico").value;
+
+        currencyconverter(from, to, val1, date, function (val2){
+          document.getElementById('val2').value = val2;
+        });
+      });
+    </script>
 
 
     <script type="text/javascript">
@@ -286,13 +310,15 @@
          $("#box_storico").show();
 
          $("#live").click(function(){
+           $("#imposta_data").fadeIn();
            $("#bandiere").fadeIn();
-           $("#box_storico").fadeOut();
+           $("#box_storico").hide();
          });
 
          $("#storica").click(function(){
            $("#box_storico").fadeIn();
-           $("#bandiere").fadeOut();
+           $("#imposta_data").hide();
+           $("#bandiere").hide();
            $("#zonaDinamica").hide();
          });
 
