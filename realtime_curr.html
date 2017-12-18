@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="css/style.css">
 <script type="text/javascript" src="js/user.js"></script>
 <script type="text/javascript" src="js/cambistorici.js"></script>
+<script src="js/plotly-latest.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script>
@@ -178,7 +179,7 @@
   	//	jQuery: DOPPIO CLICK SU BANDIERA
   		$(document).ready(function(){
   			$(".bandiere").dblclick(function(){
-          
+
           to = $(this).val();
           var ascisse = Number($("#ascisse").val());
           console.log(from+"-"+to);
