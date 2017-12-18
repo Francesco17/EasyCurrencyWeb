@@ -143,6 +143,9 @@ function trans(username, value, currency, rate){
   sessionStorage.setItem(_user.username, JSON.stringify(_user));
   localStorage.setItem(_user.username, JSON.stringify(_user));
 
+  $("#box_logged").append("<h3 style='padding-left:10px;'>Transazione "+current_id_int+" : hai cambiato "+value+" "+
+  _user.base_currency+" in "+value*rate+" "+currency+" </h3>");
+
 }
 
 function show_transactions(_user){
