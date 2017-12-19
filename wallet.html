@@ -58,8 +58,8 @@
         <h3 id="balance"> Saldo:
 
           <script type="text/javascript">
-            var username = Object.keys(sessionStorage).toString();
-            _user = JSON.parse(sessionStorage.getItem(username));
+            // var username = Object.keys(sessionStorage).toString();
+            // _user = JSON.parse(sessionStorage.getItem(username));
             if (sessionStorage.length == 1) {
               var balance = compute_balance(_user);
               document.write(balance+" "+_user.base_currency);
@@ -71,8 +71,8 @@
         <button id="plot-bars">Grafico delle transazioni</button>
 
         <script type="text/javascript">
-          var username = Object.keys(sessionStorage).toString();
-          _user = JSON.parse(sessionStorage.getItem(username));
+          // var username = Object.keys(sessionStorage).toString();
+          // _user = JSON.parse(sessionStorage.getItem(username));
           if (sessionStorage.length == 1) {
             $('#update_saldo').click(function (){
               compute_balance(_user);
@@ -101,8 +101,8 @@
     <script type="text/javascript">
       $("#change").click(function(){
 
-        var username = Object.keys(sessionStorage).toString();
-        _user = JSON.parse(sessionStorage.getItem(username));
+        // var username = Object.keys(sessionStorage).toString();
+        // _user = JSON.parse(sessionStorage.getItem(username));
         // devo prendere value, currency e rate
         var value = document.getElementById("amount").value;
         var currency = $("#curr_2_wall").val();
@@ -147,8 +147,8 @@
     <script type="text/javascript">
 
     $("#plot-bars").click(function(){
-      var username = Object.keys(sessionStorage).toString();
-      _user = JSON.parse(sessionStorage.getItem(username));
+      // var username = Object.keys(sessionStorage).toString();
+      // _user = JSON.parse(sessionStorage.getItem(username));
 
       var domain = [];
       var codomain = [];
