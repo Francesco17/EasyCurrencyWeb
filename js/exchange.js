@@ -102,12 +102,13 @@ function compute_deposit(_user){
 
   var len = _user.transaction.length;
   var deposit = 0;
+  var last_balance = _user.balance[_user.balance.length-1];
 
   for(i = 0; i<len; i++){
     deposit += Number(_user.transaction[i].valore);
   }
 
-  return 100-deposit;
+  return last_balance-deposit;
 }
 
 function compute_balance(_user){
@@ -148,7 +149,7 @@ function compute_balance(_user){
 
   }
   else {
-    return balance;
+    return old_balance;
   }
 
 }
