@@ -120,18 +120,25 @@
         // _user = JSON.parse(sessionStorage.getItem(username));
         // devo prendere value, currency e rate
         var value = document.getElementById("amount").value;
-        var currency = $("#curr_2_wall").val();
+        var deposit = compute_deposit(_user);
+        
+        if (value > deposit) {
+          alert(_user.username+", non puoi cambiare più soldi di quanti ne hai nel deposito.")
+        }
+        else {
+          var currency = $("#curr_2_wall").val();
 
-        var from = _user.base_currency;
-        var rate;
-        currencyconverter(from, currency, value, function(output){
-          // prelevo il tasso di cambio
-          rate = compute_rate(from, currency, value, output);
-          // metto la transazione nello storage quando ho ricevuto i dati tramite callback
-          trans(username, value, currency, rate);
-          $("#box_change").fadeOut();
-          $("#cancel_change").fadeOut();
-        });
+          var from = _user.base_currency;
+          var rate;
+          currencyconverter(from, currency, value, function(output){
+            // prelevo il tasso di cambio
+            rate = compute_rate(from, currency, value, output);
+            // metto la transazione nello storage quando ho ricevuto i dati tramite callback
+            trans(username, value, currency, rate);
+            $("#box_change").fadeOut();
+            $("#cancel_change").fadeOut();
+          });
+        }
 
       });
     </script>
