@@ -157,37 +157,46 @@ function delete_trans(_user, id){
   var len = _user.transaction.length;
   var dep;
 
-  if (len != 0) {
-    if (len == 1) {
-      obj.pop();
-      $('h4').last().remove();
-      sessionStorage.setItem(_user.username, JSON.stringify(_user));
-      localStorage.setItem(_user.username, JSON.stringify(_user));
-      dep = _user.balance[_user.balance.length-1];
-    }
-    else {
-      obj.splice(id-1,1);
-      len = _user.transaction.length;
-      var i = id-1;
-
-      while (i<len) {
-        obj[i].id = i+1;
-        i++;
-      }
-
-      $('h4').remove();
-      sessionStorage.setItem(_user.username, JSON.stringify(_user));
-      localStorage.setItem(_user.username, JSON.stringify(_user));
-      show_transactions(_user);
-      dep = compute_deposit(_user);
-    }
-
-    $('#deposit').html("Deposito: "+dep+" "+_user.base_currency);
-    compute_balance(_user);
+  if (id > len || id == 0) {
+    alert(_user.username+", non puoi eliminare transazioni che non esistono!");
+    return false;
   }
   else {
-    alert(_user.username+", non hai eseguito nessuna transazione.");
+
+    if (len != 0) {
+      if (len == 1) {
+        obj.pop();
+        $('h4').last().remove();
+        sessionStorage.setItem(_user.username, JSON.stringify(_user));
+        localStorage.setItem(_user.username, JSON.stringify(_user));
+        dep = _user.balance[_user.balance.length-1];
+      }
+      else {
+        obj.splice(id-1,1);
+        len = _user.transaction.length;
+        var i = id-1;
+
+        while (i<len) {
+          obj[i].id = i+1;
+          i++;
+        }
+
+        $('h4').remove();
+        sessionStorage.setItem(_user.username, JSON.stringify(_user));
+        localStorage.setItem(_user.username, JSON.stringify(_user));
+        show_transactions(_user);
+        dep = compute_deposit(_user);
+      }
+
+      $('#deposit').html("Deposito: "+dep+" "+_user.base_currency);
+      compute_balance(_user);
+    }
+    else {
+      alert(_user.username+", non hai eseguito nessuna transazione.");
+    }
   }
+
+
 
 }
 
