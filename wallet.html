@@ -6,6 +6,7 @@
 <script type="text/javascript" src="js/user.js"></script>
 <script type="text/javascript" src="js/exchange.js"></script>
 <script src="js/plotly-latest.min.js"></script>
+<script src="js/w-plots.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <head>
 <title>Analisi Finanziaria</title>
@@ -68,7 +69,14 @@
 
         </h3>
         <button id="update_saldo">Aggiorna Saldo</button>
-        <button id="plot-bars">Grafico delle transazioni</button>
+        Tipologia del grafico:
+        <select id="plot-type">
+          <option value="bar-chart">Istogramma transazioni</option>
+          <option value="pie-chart">Grafico a torta transazioni</option>
+          <option value="balance-chart">Andamento saldo</option>
+        </select>
+        <button id="plot-btn">Grafico delle transazioni</button>
+        <button id="hide-plot-btn" style="display: none">Nascondi grafico</button>
 
         <script type="text/javascript">
           // var username = Object.keys(sessionStorage).toString();
@@ -138,7 +146,7 @@
     <div>
       &nbsp;
     </div>
-    <div class="box1" id="plot" style="height:auto; padding: 5px; display:none">
+    <div class="box1" id="plot-div" style="height:auto; padding: 5px; display:none">
       <div class="content" id="content">
 
       </div>
@@ -146,40 +154,28 @@
 
     <script type="text/javascript">
 
-    $("#plot-bars").click(function(){
+    $("#plot-btn").click(function(){
       // var username = Object.keys(sessionStorage).toString();
       // _user = JSON.parse(sessionStorage.getItem(username));
+      $('#hide-plot-btn').fadeIn();
 
-      var domain = [];
-      var codomain = [];
-      var bar_width = [];
-      var base_currency = _user.base_currency;
+      var option_selected = $('#plot-type').val();
 
-      for (var i = 0; i < _user.transaction.length; i++) {
-        domain[i] = _user.transaction[i].valuta;
-        codomain[i] = _user.transaction[i].valore;
-        bar_width[i] = 0.5;
+      if (option_selected == "bar-chart") {
+        trans_plot(_user, true);
+      }
+      else if (option_selected == "pie-chart") {
+        trans_plot(_user, false);
+      }
+      else {
+        balance_plot(_user);
       }
 
-      var data = [{
-                    x: domain,
-                    y: codomain,
-                    type: 'bar',
-                    width: bar_width
-                  }];
+    });
 
-                  var layout = {
-              title: 'Transazioni effettuate',
-              xaxis: {},
-              yaxis: {
-                title: base_currency,
-                }
-              };
-
-      $('#plot').fadeIn();
-      Plotly.newPlot('plot', data, layout);
-
-
+    $('#hide-plot-btn').click(function(){
+      $('#hide-plot-btn').fadeOut();
+      $('#plot-div').fadeOut();
     });
 
     </script>
