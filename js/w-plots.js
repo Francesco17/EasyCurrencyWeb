@@ -50,6 +50,27 @@ function trans_plot(_user, flag){
 }
 
 
-function balance_plot(){
+function balance_plot(_user){
+
+  var domain = [];
+  var codomain = [];
+
+  for (var i = 0; i < _user.balance.length; i++) {
+    codomain[i] = _user.balance[i];
+    domain[i] = i;
+  }
+
+  var data = [{
+  x: domain,
+  y: codomain,
+  type: 'scatter'
+}];
+
+  var layout = {
+    title: 'Andamento saldo'
+  };
+
+  $('#plot-div').fadeIn();
+  Plotly.newPlot('plot-div', data, layout);
 
 }
