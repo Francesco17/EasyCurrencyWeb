@@ -138,6 +138,9 @@ function compute_balance(_user){
         sessionStorage.setItem(_user.username, JSON.stringify(_user));
         localStorage.setItem(_user.username, JSON.stringify(_user));
       }
+      else {
+        alert(_user.username+", il saldo è rimasto invariato rispetto all'ultimo aggiornamento.");
+      }
 
       return false;
 

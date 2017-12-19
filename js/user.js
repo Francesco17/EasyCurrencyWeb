@@ -124,6 +124,8 @@ function User(username, password, base_currency){
 function trans(username, value, currency, rate){
 
   _user = JSON.parse(sessionStorage.getItem(username));
+  var dep = compute_deposit(_user);
+  dep = Number(dep-value);
 
   // devo sapere qual è l'ultima transazione
   var last_el = _user.transaction[_user.transaction.length-1];
@@ -143,8 +145,49 @@ function trans(username, value, currency, rate){
   sessionStorage.setItem(_user.username, JSON.stringify(_user));
   localStorage.setItem(_user.username, JSON.stringify(_user));
 
-  $("#box_logged").append("<h3 style='padding-left:10px;'>Transazione "+current_id_int+" : hai cambiato "+value+" "+
-  _user.base_currency+" in "+value*rate+" "+currency+" </h3>");
+  $("#box_logged").append("<h4 style='padding-left:10px;'>Transazione "+current_id_int+" : hai cambiato "+value+" "+
+  _user.base_currency+" in "+value*rate+" "+currency+" </h4>");
+  $('#deposit').html("Deposito: "+dep+" "+_user.base_currency);
+
+}
+
+function delete_trans(_user, id){
+
+  var obj = _user.transaction;
+  var len = _user.transaction.length;
+  var dep;
+
+  if (len != 0) {
+    if (len == 1) {
+      obj.pop();
+      $('h4').last().remove();
+      sessionStorage.setItem(_user.username, JSON.stringify(_user));
+      localStorage.setItem(_user.username, JSON.stringify(_user));
+      dep = _user.balance[_user.balance.length-1];
+    }
+    else {
+      obj.splice(id-1,1);
+      len = _user.transaction.length;
+      var i = id-1;
+
+      while (i<len) {
+        obj[i].id = i+1;
+        i++;
+      }
+
+      $('h4').remove();
+      sessionStorage.setItem(_user.username, JSON.stringify(_user));
+      localStorage.setItem(_user.username, JSON.stringify(_user));
+      show_transactions(_user);
+      dep = compute_deposit(_user);
+    }
+
+    $('#deposit').html("Deposito: "+dep+" "+_user.base_currency);
+    compute_balance(_user);
+  }
+  else {
+    alert(_user.username+", non hai eseguito nessuna transazione.");
+  }
 
 }
 
@@ -155,29 +198,12 @@ function show_transactions(_user){
   // var divs = [];
 
   for(i=0; i<len; i++){
-    $("#box_logged").append("<h3 style='padding-left:10px;'>Transazione "+obj[i].id+" : hai cambiato "+obj[i].valore+" "+
-    _user.base_currency+" in "+obj[i].valore*obj[i].tasso+" "+obj[i].valuta+" </h3>");
+    $("#box_logged").append("<h4 style='padding-left:10px;'>Transazione "+obj[i].id+" : hai cambiato "+obj[i].valore+" "+
+    _user.base_currency+" in "+obj[i].valore*obj[i].tasso+" "+obj[i].valuta+" </h4>");
     // divs[i] = "<h3 style='padding-left:10px;'>Transazione "+obj[i].id+" : hai cambiato "+obj[i].valore+" in "+obj[i].valuta+" </h3>";
   }
 
 }
-
-// function delete_trans(_user, id){
-//
-//   var len = _user.transaction.length;
-//   var obj = _user.transaction;
-//
-//
-//   if (len != 0) {
-//
-//   }
-//   else {
-//
-//   }
-//
-// }
-
-//inserire la funzione isInLocal come metodo dell'oggetto user
 
 //*******function to validate the form of currency converter*******************
 /*

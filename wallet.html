@@ -43,7 +43,7 @@
       <div class="content" id="content">
         <h1>Portafoglio</h1>
         <h3>Nome Utente: <script type="text/javascript">document.write(Object.keys(sessionStorage).toString());</script></h3>
-        <h3>Deposito:
+        <h3 id="deposit">Deposito:
 
           <script type="text/javascript">
             var username = Object.keys(sessionStorage).toString();
@@ -76,14 +76,22 @@
           <option value="balance-chart">Andamento saldo</option>
         </select>
         <button id="plot-btn">Grafico delle transazioni</button>
-        <button id="hide-plot-btn" style="display: none">Nascondi grafico</button>
-
+        <button id="hide-plot-btn" style="display: none">Nascondi grafico</button><br />
+        <p>
+          Vuoi cancellare una transazione? Inserisci il numero identificativo:
+          <input id="trans-del-id" type="number" min="0"/>
+          <button id="trans-del-btn">Cancella transazione</button>
+        </p>
         <script type="text/javascript">
           // var username = Object.keys(sessionStorage).toString();
           // _user = JSON.parse(sessionStorage.getItem(username));
           if (sessionStorage.length == 1) {
             $('#update_saldo').click(function (){
               compute_balance(_user);
+            });
+            $('#trans-del-btn').click(function(){
+              var id = $('#trans-del-id').val();
+              delete_trans(_user, id);
             });
           }
         </script>
@@ -108,7 +116,6 @@
 
     <script type="text/javascript">
       $("#change").click(function(){
-
         // var username = Object.keys(sessionStorage).toString();
         // _user = JSON.parse(sessionStorage.getItem(username));
         // devo prendere value, currency e rate
