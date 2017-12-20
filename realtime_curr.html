@@ -180,14 +180,14 @@
   		});
 
   	//	jQuery: DOPPIO CLICK SU BANDIERA
-  		// $(document).ready(function(){
+  		$(document).ready(function(){
   			// $(".bandiere").dblclick(function(){
 				$("#grafico").click(function(){
 
           // to = $(this).attr("id");
 					to = $("#curr").val();
           var ascisse = Number($("#ascisse").val());
-          console.log(from+"-"+to);
+          // console.log(from+"-"+to);
           var passo = Number($("#passo").val());
           // console.log("num passo --> "+passo);
 
@@ -195,19 +195,26 @@
           var valoriAsseY = [];
 
           const millgiorno = 86400000;  // millisecondi in un giorno
-          var date = new Date(document.getElementById("giorno-grafico").value);
+          var date = new Date(document.getElementById("giorno").value);
           date_mill = date.getTime();
           // console.log("init del date mill "+date_mill);
-          dateAsseX[0] = document.getElementById("giorno-grafico").value;
+          dateAsseX[0] = document.getElementById("giorno").value;
+					// console.log(dateAsseX[0]);
 
-          for (let i = 0; i < ascisse; i++) {
-            date_mill += millgiorno*passo;
-            date = new Date(date_mill);
-            dateAsseX[i] = date.toISOString();
-            dateAsseX[i] = dateAsseX[i].substring(NaN,10);
-            // chiamata bloccante
+          for (var i = 0; i < ascisse; i++) {
+
+						if (i != 0) {
+							date_mill -= millgiorno*passo;
+							date = new Date(date_mill);
+							dateAsseX[i] = date.toISOString();
+							dateAsseX[i] = dateAsseX[i].substring(NaN,10);
+						}
+						// console.log(dateAsseX[i]);
+						// chiamata bloccante
             valoriAsseY[i] = currency_graph(from, to, 1, dateAsseX[i]);
           }
+					// console.log(dateAsseX);
+					// console.log(valoriAsseY);
 
           var data = [{
                       x: dateAsseX,
@@ -215,16 +222,24 @@
                       type: 'scatter'
                       }];
 
-          Plotly.newPlot('GraficoStoricoValuta', data);
+					var layout = {
+          title: 'Andamento tasso di cambio da '+from+' a '+to,
+          xaxis: {
+						title: "Date da "+dateAsseX[dateAsseX.length-1]+" al "+dateAsseX[0],
+					},
+          yaxis: {
+	        title: "Tasso di cambio",
+	        			}
+	      	};
+
+					$('#GraficoStoricoValuta').fadeIn();
+          Plotly.newPlot('GraficoStoricoValuta', data, layout);
 						// var stile = "top=10, left=10, width=250, height=200, status=no, menubar=no, toolbar=no, scrollbars=no";
 
 						// window.open("grafico.html","",stile);
         	});
 
-          // popup del grafico
-
-  				// alert("window.open() apre popup con grafico");
-  			// });
+  			});
   	</script>
 
     <div>
@@ -243,14 +258,14 @@
     <div class="box1" id="input-grafico" style="height:auto; padding: 10px;">
       <!-- da quale data?<br />
       <input id="giorno-grafico" type="date"  value="2017-01-01" min="2010-01-01"/><br /> -->
-			seleziona la valuta di cambio:
+			seleziona la valuta di cambio:<br />
 			<select class="currencies" id="curr">
 				<script type="text/javascript">
 				$("#curr").load("files/currencies.html", function(){
 					$("#curr").val("BTC");
 				});
 				</script>
-			</select>
+			</select><br />
       quanti valori sulle ascisse?<br />
       <input id="ascisse" type="number" value="4" min="2" max="31"/><br />
       e con quale passo?<br />
@@ -360,7 +375,15 @@
       });
     </script>
 
-    <div id="GraficoStoricoValuta" style="height:auto; width: auto;"></div>
+		<div>
+			&nbsp;
+		</div>
+
+    <div class="box1" id="GraficoStoricoValuta" style="height:auto; padding:5px; display:none;">
+			<div class="content" id="content">
+
+			</div>
+		</div>
 <!--
     // var from = $("#curr_1").val();
     // var to = $("#curr_2").val();

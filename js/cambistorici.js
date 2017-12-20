@@ -52,7 +52,8 @@ function currency_graph(from, to, val1, date){
 endpoint = 'historical'
 access_key = 'cdaa48c0799e268d91b98681529912eb';
 source = "USD";
-url = 'http://apilayer.net/api/' + endpoint + '?access_key=' + access_key + '&date=' + date + '&source='+ source + '&currencies='+ to;
+currencies = from+","+to;
+url = 'http://apilayer.net/api/' + endpoint + '?access_key=' + access_key + '&date=' + date + '&source='+ source + '&currencies='+ currencies;
 
 var conversione;
 if (val1 == '') { return false; }
