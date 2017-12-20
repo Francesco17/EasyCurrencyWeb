@@ -72,7 +72,7 @@ function invert_curr(){
   $('#curr_1').val(to);
 
   //ricalcolo al conversione
-  currencyconverter(from, to, value, function(output){
+  currencyconverter(to, from, value, function(output){
     document.getElementById('val2').value = output;
   });
 
