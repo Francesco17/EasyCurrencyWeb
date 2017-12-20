@@ -63,7 +63,7 @@
             // _user = JSON.parse(sessionStorage.getItem(username));
             if (sessionStorage.length == 1) {
               var balance = compute_balance(_user);
-              document.write(balance+" "+_user.base_currency);
+              $('#balance').html("Saldo: "+balance+" "+_user.base_currency);
             }
           </script>
 
@@ -121,7 +121,7 @@
         // devo prendere value, currency e rate
         var value = document.getElementById("amount").value;
         var deposit = compute_deposit(_user);
-        
+
         if (value > deposit) {
           alert(_user.username+", non puoi cambiare più soldi di quanti ne hai nel deposito.")
         }
