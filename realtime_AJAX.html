@@ -2,179 +2,446 @@
 <html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 <link rel="stylesheet" href="css/style.css">
 <script type="text/javascript" src="js/user.js"></script>
-<script type="text/javascript" src="js/exchange.js"></script>
+<script type="text/javascript" src="js/cambistorici.js"></script>
+<script src="js/plotly-latest.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<script>
+	// inizializzo le variabili globali
+	from = "USD";
+	fromtitolo = "US Dollar";
+	val1 = 1;
+	date = "2017-01-01";
+
+// suo
+
+	// genero HTML bandierine
+	$(document).ready(function () {
+		$.get("files/currencies.html", function (data) {
+
+			// console.log(data);
+
+			data1 = data.split("\n");
+			// console.log(data1);
+			var data2 = [];
+
+
+			var Costruttore_HTML_img_Bandiere ="";
+			// console.log(data1.length);
+			for (i = 0; i < data1.length-1; i++) {
+				// console.log(data1[i]);
+				data2 = data1[i].split(">",1);
+				// console.log("data2 è "+data2);
+				data3 = data2[0].split(" ");
+				data4 = data2[0].slice(20);
+				// console.log("data3 è "+data3[1]);
+				// console.log("data4 è: "+data4);
+
+				var flg = data3[1].slice(7,10);
+				flg = flg.toLocaleLowerCase();
+
+				// console.log("flag: "+flg);
+				Costruttore_HTML_img_Bandiere += '<img class="bandiere" width=10% src="currency-flags/src/flags/'+flg+'.png" id="'+flg.toUpperCase()+'" '+data4+' />\n'
+				}
+			// console.log(Costruttore_HTML_img_Bandiere);
+        $('#content-bandiere').html(Costruttore_HTML_img_Bandiere);
+		});
+	});
+</script>
+
+<style>
+	img { margin: 2px; width: 9%; }
+	img { border: 1px solid blue; }
+	img:hover { outline: 4px solid yellow; }
+
+	/* Chrome, Safari, Opera */
+	@-webkit-keyframes mymove { 50% {outline: 5px solid lightblue;} }
+
+	/* Standard syntax */
+	@keyframes mymove { 50% {outline: 5px solid lightblue;} }
+</style>
 
 <head>
-	<title>Valute in tempo reale (AJAX)</title>
-
-	<script src="libraries/plotly-latest.min.js"></script>
-
-	<!--calendario Epoch-->
-	<link rel="stylesheet" type="text/css" href="libraries/epochprime_styles.css" />
-	<script type="text/javascript" src="libraries/epochprime_modificata.js"></script>
-	<script type="text/javascript">
-		var inizioGrafico, fineGrafico;
-		window.onload = function () {
-			var config_xml = '<configs><initcfg><name>bas_cal<\/name><mode>flat<\/mode><multiselect>no<\/multiselect><\/initcfg><\/configs>';
-			inizioGrafico = new EpochPrime(document.getElementById('inizioGrafico'),config_xml);
-		};
-	</script>
-
-
-		<script>
-			function funzionetest() {
-				$("#toccoBandiera").hide();
-				$("#toccoBandiera").show();
-				var stampa = currencyconverter();
-				console.log(stampa);
-				document.getElementById("toccoBandiera").innerHTML = stampa;
-				}
-
-			/*
-
-			$(".bandiere").mouseover();
-
-				var quantebandiere = document.getElementsByClassName("bandiere");
-			for (var i = 0; i < quantebandiere.length; i++) {
-				quantebandiere[i].onmouseover = aggiornaValuta ;}
-			function aggiornaValuta(e) {
-				// if (e.target.readyState == 4 && e.target.status == 200)
-
-				console.log("funziona");
-
-			}
-			*/
-		</script>
-
-
-	<style>
-		header, footer {
-    			padding: 1em;
-    			clear: left;
-    			text-align: center;}
-		selezioneValute {
-    			float: left;
-    			max-width: 160px;
-    			margin: 0;
-    			padding: 1em;}
-		selezioneValute ul { list-style-type: none; padding: 0; }
-   		selezioneValute ul a { text-decoration: none; }
-		bandiere {
-    			margin-left: 111px;
-    			border-left: 1px solid blue;
-    			padding: 1em;
-    			overflow: hidden;}
-	</style>
-
+<title>Conversione storica di valute e criptovalute</title>
 </head>
-
-
 <body>
-	<div class="contenitore">
 
-	<header>
-		<div class="nav">
-		<ul>
-        		<li class="logo"><a href="index.html">PROGETTO</a></li>
-        		<li class="home"><a href="index.html">Home</a></li>
-        		<li class="currencies-page"><a class="active" href="#">Currencies</a></li>
-       			<!--<li class="about"><a href="#">About</a></li>-->
-        		<li class="contacts"><a href="contacts.html">Contacts</a></li>
-        		<li class="about"><a href="aboutus.html">About us</a></li>
-      		</ul>
-    		</div>
-	</header>
+  <div class="container">
 
-	<selezioneValute>
-	<ul>
-   		<li>VALUTA BASE</li>
-			<input type="text" id="val1" name="val1"  size="14" value="1"/>
-			<select class="currencies" id="curr_1">
-                      		<script>
-				$("#curr_1").load("files/currencies.html",
-					function(){
-                        			$("#curr_1").val("EUR");	<!-- EURO valore di default -->
-                      			});
-                      		</script>
-                    	</select>
-   		<li>CONVERSIONE</li>
-		<input type="text" id="val2" name="val2" size="14"/>
-		<hr/>
-<!-- tendine selezione valute -->
-			<select class="currencies" id="curr_2">
-                      		<script>
-				$("#curr_2").load("files/currencies.html",
-					function(){
-                        			$("#curr_2").val("USD");
-                      			});
-                      		</script>
-                    	</select>
-			<select class="currencies" id="curr_3">
-                      		<script>
-				$("#curr_3").load("files/currencies.html",
-					function(){
-                        			$("#curr_3").val("JPY");
-                      			});
-                      		</script>
-                    	</select>
-   		<li>TENDINA</li>
-   		<li>TENDINA</li>
-   		<li>TENDINA</li>
-   		<li>TENDINA</li>
-		<br>
-		torna al tuo
-		<button>portafoglio</button>
+    <div class="nav">
+      <ul>
+        <li class="logo"><a href="index.html">MONETARIA</a></li>
+        <li class="home"><a href="index.html">Home</a></li>
+        <li class="currencies-page"><a class="active" href="#">Valute</a></li>
+        <li class="wallet-page"><a href="wallet.html">Portafoglio</a></li>
+        <li class="contacts"><a href="contacts.html">Contatti</a></li>
+        <li class="about"><a href="aboutus.html">Chi siamo</a></a></li>
+      </ul>
+    </div>
 
-	</ul>
-	</selezioneValute>
+    <!-- aggiungo uno spazio vuoto,  -->
+    <div>
+      &nbsp;
+    </div>
+    <!-- box contentente i vari bottoni che al click cambiano il contenuto del box successivo -->
+    <div class="box1" style="height: auto; text-align:center; padding: 10px" id="bottoni">
+      <div class="content" id="content">
+          <button style="height:30px;" id="storica">Cambio valuta storica</button>
+          <button style="height:30px;" id="live">Cambi valute live</button>
+      </div>
+    </div>
 
-	<script>
-		function convertiIn() {
-			curr_2="usd";
-			currencyconverter();
-			return false;
-		}
-	</script>
+    <div class="box1" style="height:50px; padding: 10px; display: inherit;" id="not_logged">
+      <div class="content" id="content">
+        <p>
+          Se vuoi accedere alla funzionalità valute devi effettuare il login..
+        </p>
+      </div>
+    </div>
 
-	<bandiere>
-		<form>
+    <div class="box1" id="imposta_data" style="display: none;">
+      <div class="content" id="content">
+        <p style="padding:5px;">
+          Seleziona la data di riferimento per i tassi di cambio:
+          <input id="giorno" type="date" min="2010-01-01"/>
+          e fai click una volta sulla bandiera della tua della valuta base.
+          <script type="text/javascript">
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //zero è gennaio
+            var yyyy = today.getFullYear();
+            if(dd<10) {dd='0'+dd}
+            if(mm<10) {mm='0'+mm}
+            today = yyyy+'-'+mm+'-'+dd;
+            document.getElementById("giorno").setAttribute("max", today);
+            document.getElementById("giorno").setAttribute("value", today);
+          </script>
+        </p>
+      </div>
+    </div>
 
-		<img onmouseover="funzionetest();" class="bandiere" id="usd" type="image" src="currency-flags/src/flags/usd.png" width="192" height="128" onclick="currencyconverter(); return false;" value="Converti" />
+    <div class="box1" id="bandiere" style="text-align:center; height:auto; padding: 10px">
+      <div class="content" id="content-bandiere">
+        <!-- <img id='USD' src="currency-flags/src/flags/usd.png" class="bandiere" width="10%" title='United States Dollar' />
+        <img id='BTC' src="currency-flags/src/flags/btc.png" class="bandiere" width="10%" title='Bitcoin' />
+        <img id='AED' src="currency-flags/src/flags/aed.png" class="bandiere" width="10%" title='United Arab Emirates Dirham' />
+        <img id='ARS' src="currency-flags/src/flags/ars.png" class="bandiere" width="10%" title='Argentine Peso' />
+        <img id='AUD' src="currency-flags/src/flags/aud.png" class="bandiere" width="10%" title='Australian Dollar' />
+        <img id='BRL' src="currency-flags/src/flags/brl.png" class="bandiere" width="10%" title='Brazilian Real' />
+        <img id='CAD' src="currency-flags/src/flags/cad.png" class="bandiere" width="10%" title='Canadian Dollar' />
+        <img id='CHF' src="currency-flags/src/flags/chf.png" class="bandiere" width="10%" title='Swiss Franc' />
+        <img id='CNY' src="currency-flags/src/flags/cny.png" class="bandiere" width="10%" title='Chinese Yuan' />
+        <img id='COP' src="currency-flags/src/flags/cop.png" class="bandiere" width="10%" title='Colombian Peso' />
+        <img id='CZK' src="currency-flags/src/flags/czk.png" class="bandiere" width="10%" title='Czech Republic Koruna' />
+        <img id='EGP' src="currency-flags/src/flags/egp.png" class="bandiere" width="10%" title='Egyptian Pound' />
+        <img id='ETB' src="currency-flags/src/flags/etb.png" class="bandiere" width="10%" title='Ethiopian Birr' />
+        <img id='EUR' src="currency-flags/src/flags/eur.png" class="bandiere" width="10%" title='Euro' />
+        <img id='GBP' src="currency-flags/src/flags/gbp.png" class="bandiere" width="10%" title='British Pound Sterling' />
+        <img id='HKD' src="currency-flags/src/flags/hkd.png" class="bandiere" width="10%" title='Hong Kong Dollar' />
+        <img id='ILS' src="currency-flags/src/flags/ils.png" class="bandiere" width="10%" title='Israeli New Sheqel' />
+        <img id='INR' src="currency-flags/src/flags/inr.png" class="bandiere" width="10%" title='Indian Rupee' />
+        <img id='IQD' src="currency-flags/src/flags/iqd.png" class="bandiere" width="10%" title='Iraqi Dinar' />
+        <img id='IRR' src="currency-flags/src/flags/irr.png" class="bandiere" width="10%" title='Iranian Rial' />
+        <img id='JPY' src="currency-flags/src/flags/jpy.png" class="bandiere" width="10%" title='Japanese Yen' />
+        <img id='KPW' src="currency-flags/src/flags/kpw.png" class="bandiere" width="10%" title='North Korean Won' />
+        <img id='KRW' src="currency-flags/src/flags/krw.png" class="bandiere" width="10%" title='South Korean Won' />
+        <img id='MXN' src="currency-flags/src/flags/mxn.png" class="bandiere" width="10%" title='Mexican Peso' />
+        <img id='NOK' src="currency-flags/src/flags/nok.png" class="bandiere" width="10%" title='Norwegian Krone' />
+        <img id='RUB' src="currency-flags/src/flags/rub.png" class="bandiere" width="10%" title='Russian Ruble' />
+        <img id='SGD' src="currency-flags/src/flags/sgd.png" class="bandiere" width="10%" title='Singapore Dollar' /> -->
 
-		<input class="bandiere" id="usd" type="image" src="currency-flags/src/flags/usd.png" width="192" height="128" onclick="currencyconverter(); return false;" value="Converti" />
-		<input class="bandiere" type="image" src="currency-flags/src/flags/jpy.png" width="192" height="128">
-		<input class="bandiere" name="eur" type="image" src="currency-flags/src/flags/eur.png"  width="192" height="128">
+      </div>
+    </div>
 
-		<input type="image" src="currency-flags/src/flags/usd.png" width="192" height="128">
-		<input type="image" src="currency-flags/src/flags/jpy.png" alt="Submit" width="192" height="128">
-		<input type="image" src="currency-flags/src/flags/usd.png" alt="Submit" width="192" height="128">
-		<input type="image" src="currency-flags/src/flags/jpy.png" alt="Submit" width="192" height="128">
-		<input type="image" src="currency-flags/src/flags/usd.png" alt="Submit" width="192" height="128">
-		<input type="image" src="currency-flags/src/flags/jpy.png" alt="Submit" width="192" height="128">
-		</form>
+    <script>
 
-		<h1>
-<!-- ZONA DINAMICA -->
-		<div id="toccoBandiera">
-			VALORE INIZIALE
-	      	</div>
-		</h1>
+  	//	jQuery: MOUSEOVER SU BANDIERA
 
-	</bandiere>
+  		$(document).ready(function(){
+  		  $(".bandiere").mouseover(function(){
+  				to = $(this).attr("id");
+          title = $(this).attr("title");
+  	//			val1 = $(#val1).attr("value");
+  				date = document.getElementById("giorno").value;;
+          var converti
+  				// converti = 999; // valore base per i test di controllo
+  	  		currencyconverter(from, to, val1, date, function(val2){
+  	  			converti=val2.toString();
+  	  			// console.log("valore "+converti);
+            // console.log(typeof(converti));
+
+            $("#zonaDinamica").fadeIn();
+            var stampavaluta = "il "+date+" "+val1+" "+fromtitolo+" ("+from+") equivale a "+converti+" "+ title+" ("+to+")";
+            $("#zonaDinamica").text(stampavaluta);
+          });
+
+  			});
+  			$(".bandiere").mouseleave(function(){ $("#zonaDinamica").fadeOut(); });
+  		});
 
 
-	<footer>
-	<div id="" style="width:999px;height:333px;"></div>
-		<!-- ZONA DINAMICA 2 -->1
-      	</div>
-	</footer>
+  	//	jQuery: CLICK SU BANDIERA
+  		$(document).ready(function(){
+  			$(".bandiere").click(function(){
+  				from = $(this).attr("id");
+					// console.log(from);
+					fromtitolo = $(this).attr("title");
+  				$("img").css("animation", "mymove 0s");
+  				$(this).css("animation", "mymove 3s infinite");
+  			});
+  		});
 
-</div>
+  	//	jQuery: DOPPIO CLICK SU BANDIERA
+  		$(document).ready(function(){
+  			// $(".bandiere").dblclick(function(){
+				$("#grafico").click(function(){
+
+          // to = $(this).attr("id");
+					to = $("#curr").val();
+          var ascisse = Number($("#ascisse").val());
+          // console.log(from+"-"+to);
+          var passo = Number($("#passo").val());
+          // console.log("num passo --> "+passo);
+
+          var dateAsseX = [];
+          var valoriAsseY = [];
+
+          const millgiorno = 86400000;  // millisecondi in un giorno
+          var date = new Date(document.getElementById("giorno").value);
+          date_mill = date.getTime();
+          // console.log("init del date mill "+date_mill);
+          dateAsseX[0] = document.getElementById("giorno").value;
+					// console.log(dateAsseX[0]);
+
+          for (var i = 0; i < ascisse; i++) {
+
+						if (i != 0) {
+							date_mill -= millgiorno*passo;
+							date = new Date(date_mill);
+							dateAsseX[i] = date.toISOString();
+							dateAsseX[i] = dateAsseX[i].substring(NaN,10);
+						}
+						// console.log(dateAsseX[i]);
+						// chiamata bloccante
+            valoriAsseY[i] = currency_graph(from, to, 1, dateAsseX[i]);
+          }
+					// console.log(dateAsseX);
+					// console.log(valoriAsseY);
+
+          var data = [{
+                      x: dateAsseX,
+                      y: valoriAsseY,
+                      type: 'scatter'
+                      }];
+
+					var layout = {
+          title: 'Andamento tasso di cambio da '+from+' a '+to,
+          xaxis: {
+						title: "Date da "+dateAsseX[dateAsseX.length-1]+" al "+dateAsseX[0],
+					},
+          yaxis: {
+	        title: "Tasso di cambio",
+	        			}
+	      	};
+
+					$('#GraficoStoricoValuta').fadeIn();
+          Plotly.newPlot('GraficoStoricoValuta', data, layout);
+						// var stile = "top=10, left=10, width=250, height=200, status=no, menubar=no, toolbar=no, scrollbars=no";
+
+						// window.open("grafico.html","",stile);
+        	});
+
+  			});
+  	</script>
+
+    <div>
+    &nbsp;
+    </div>
+    <div class="box1" id="zonaDinamica" style="height:auto; padding: 10px; display: none;">
+      <div class="content" id="content">
+
+      </div>
+    </div>
+
+    <div>
+      &nbsp;
+    </div>
+
+    <div class="box1" id="input-grafico" style="height:auto; padding: 10px;">
+      <!-- da quale data?<br />
+      <input id="giorno-grafico" type="date"  value="2017-01-01" min="2010-01-01"/><br /> -->
+			seleziona la valuta di cambio:<br />
+			<select class="currencies" id="curr">
+				<script type="text/javascript">
+				$("#curr").load("files/currencies.html", function(){
+					$("#curr").val("BTC");
+				});
+				</script>
+			</select><br />
+      quanti valori sulle ascisse?<br />
+      <input id="ascisse" type="number" value="9" min="2" max="31"/><br />
+      e con quale passo?<br />
+      <input id="passo" type="number"  value="7" min="1" /><br />
+      <button id="grafico">Grafico</button>
+
+    </div>
+
+
+    <!-- box contentente il convertitore di valute, l'altezza è fissata -->
+    <div class="box1" style="height: auto" id="box_storico">
+      <div class="content" id="content">
+          <h2>Conversione storica di valute e criptovalute</h2>
+          <p>Strumento semplice per convertire valute/criptovalute, nei principali cambi</p>
+          <p>Scegli la valuta base, la valuta di destinazione della conversione e la data storica
+          in cui effettuare il cambio.</p>
+          <div class="flex-container">
+            <div>
+              <!-- organizzo il contenuto in una tabella -->
+              <table class="table1">
+                <tr>
+                  <td>
+                    Seleziona una valuta:
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <select class="currencies" id="curr_1">
+                      <!-- carico le options e seleziono il valore di default -->
+                      <script type="text/javascript">
+                      $("#curr_1").load("files/currencies.html", function(){
+                        $("#curr_1").val("EUR");
+                      });
+                      </script>
+                    </select>
+                  </td>
+                </tr>
+                <div>
+                  &nbsp;
+                </div>
+                <tr>
+                  <td>
+                    <input type="text" id="val1" name="val1" size="19"/>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div>
+              <table class="table1">
+                <tr>
+                  <td>
+                    Seleziona una valuta:
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <select class="currencies" id="curr_2">
+                      <script type="text/javascript">
+                      $("#curr_2").load("files/currencies.html", function(){
+                        $("#curr_2").val("USD");
+                      });
+                      </script>
+                    </select>
+                  </td>
+                </tr>
+                <div>
+                  &nbsp;
+                </div>
+                <tr>
+                  <td>
+                    <input type="text" id="val2" name="val2" size="19"/>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div style="background: inherit;">
+              In quale data?
+              <input id="giorno-storico" type="date"  value="2017-01-01" min="2010-01-01"/>
+              <script type="text/javascript">
+            		var today = new Date();
+            		var dd = today.getDate();
+            		var mm = today.getMonth()+1; //zero è gennaio
+            		var yyyy = today.getFullYear();
+            		if(dd<10) {dd='0'+dd}
+            		if(mm<10) {mm='0'+mm}
+            		today = yyyy+'-'+mm+'-'+dd;
+            		document.getElementById("giorno-storico").setAttribute("max", today);
+              </script>
+              <br />
+              <p></p>
+              <input type="submit" id="converti" value="Converti" />
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <script>
+      $("#converti").click(function(){
+        var from = document.getElementById("curr_1").options[document.getElementById("curr_1").selectedIndex].value;
+        var to = document.getElementById("curr_2").options[document.getElementById("curr_2").selectedIndex].value;
+        var val1 = document.getElementById('val1').value;
+        var date = document.getElementById("giorno-storico").value;
+
+        currencyconverter(from, to, val1, date, function (val2){
+          document.getElementById('val2').value = val2;
+        });
+      });
+    </script>
+
+		<div>
+			&nbsp;
+		</div>
+
+    <div class="box1" id="GraficoStoricoValuta" style="height:auto; padding:5px; display:none;">
+			<div class="content" id="content">
+
+			</div>
+		</div>
+<!--
+    // var from = $("#curr_1").val();
+    // var to = $("#curr_2").val();
+    // var val1 = document.getElementById('val1').value; -->
+
+
+    <script type="text/javascript">
+    // se l'utente non è loggato, non accede alla feature portafoglio.
+       if (sessionStorage.length != 1) {
+         // faccio il display di un messaggio di errore
+         $("#not_logged").show();
+         $("#bottoni").hide();
+         $("#bandiere").hide();
+         $("#box_storico").hide();
+         $("#input-grafico").hide();
+       }
+       else {
+
+         $("#not_logged").hide();
+         $("#bottoni").show();
+         $("#bandiere").show();
+         $("#input-grafico").show();
+         $("#box_storico").hide();
+
+         $("#live").click(function(){
+           $("#imposta_data").fadeIn();
+           $("#bandiere").fadeIn();
+           $("#input-grafico").fadeIn();
+           $("#box_storico").hide();
+         });
+
+         $("#storica").click(function(){
+           $("#box_storico").fadeIn();
+           $("#imposta_data").hide();
+           $("#bandiere").hide();
+           $("#zonaDinamica").hide();
+					 $("#input-grafico").hide();
+         });
+
+       }
+    </script>
+
+  </div>
+
 </body>
 
 </html>
