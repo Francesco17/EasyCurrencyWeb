@@ -169,7 +169,8 @@ function delete_trans(_user, id){
         $('h4').last().remove();
         sessionStorage.setItem(_user.username, JSON.stringify(_user));
         localStorage.setItem(_user.username, JSON.stringify(_user));
-        dep = _user.balance[_user.balance.length-1];
+        // dep = _user.balance[_user.balance.length-1];
+        dep = compute_deposit(_user);
       }
       else {
         obj.splice(id-1,1);

@@ -101,15 +101,15 @@ function compute_rate(from, to, val1, val2){
 function compute_deposit(_user){
 
   var len = _user.transaction.length;
-  var deposit = 0;
+  var trans_value = 0;
   var last_balance = _user.balance[_user.balance.length-1];
 
   //calcola tutti i valori investiti
   for(i = 0; i<len; i++){
-    deposit += Number(_user.transaction[i].valore);
+    trans_value += Number(_user.transaction[i].valore);
   }
 
-  return last_balance-deposit;
+  return _user.balance[0]-trans_value; //100-valori investiti
 }
 
 function compute_balance(_user){
@@ -122,11 +122,11 @@ function compute_balance(_user){
   var balance = 0;
   var old_conversion;
 
-  console.log("old_balance: "+old_balance);
-  console.log("balance: "+balance);
+  // console.log("old_balance: "+old_balance);
+  // console.log("balance: "+balance);
 
   if (len != 0) {
-    console.log("lunghezza trnsazioni: "+len);
+    // console.log("lunghezza trnsazioni: "+len);
     rates_call_for_transactions().done(function(rates){
 
       for(i=0; i<len; i++){
@@ -134,7 +134,7 @@ function compute_balance(_user){
         combine = source+obj[i].valuta;
         balance += Number(old_conversion/rates.quotes[combine]);
       }
-      console.log("balance dopo il for: "+balance);
+      // console.log("balance dopo il for: "+balance);
 
       var deposit = compute_deposit(_user);
       var overall = deposit + balance;
@@ -142,7 +142,7 @@ function compute_balance(_user){
       $('#balance').html('Saldo: '+overall+" "+_user.base_currency);
 
       if (old_balance != overall) {
-        console.log("old_balance e balance diversi.........")
+        // console.log("old_balance e balance diversi.........")
         _user.balance.push(overall);
         sessionStorage.setItem(_user.username, JSON.stringify(_user));
         localStorage.setItem(_user.username, JSON.stringify(_user));
