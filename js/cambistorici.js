@@ -9,7 +9,7 @@ function currencyconverter( from, to, val1, date, result){
 
 
 endpoint = 'historical';
-access_key = 'cdaa48c0799e268d91b98681529912eb';
+access_key = '067f84ff7a41320d09e54dd3f766cfb3' ; //'cdaa48c0799e268d91b98681529912eb'
 source = "USD";
 currencies = from+","+to;
 
@@ -50,7 +50,7 @@ function currency_graph(from, to, val1, date){
 
 // definisco risorsa, access key e sorgente
 endpoint = 'historical'
-access_key = 'cdaa48c0799e268d91b98681529912eb';
+access_key = '067f84ff7a41320d09e54dd3f766cfb3';
 source = "USD";
 currencies = from+","+to;
 url = 'http://apilayer.net/api/' + endpoint + '?access_key=' + access_key + '&date=' + date + '&source='+ source + '&currencies='+ currencies;
