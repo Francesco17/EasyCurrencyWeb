@@ -90,7 +90,7 @@ function compute_rate(from, to, val1, val2){
     rate = val1/val2;
   }
   else {
-    // triangolazione infattibile
+    // triangolazione XxX-USD-YYY infattibile dato un solo tasso di cambio.
     rate = 1;
   }
 

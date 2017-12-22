@@ -59,8 +59,7 @@
         <h3 id="balance"> Saldo:
 
           <script type="text/javascript">
-            // var username = Object.keys(sessionStorage).toString();
-            // _user = JSON.parse(sessionStorage.getItem(username));
+
             if (sessionStorage.length == 1) {
               var balance = compute_balance(_user);
               $('#balance').html("Saldo: "+balance+" "+_user.base_currency);
@@ -83,8 +82,7 @@
           <button id="trans-del-btn">Cancella transazione</button>
         </p>
         <script type="text/javascript">
-          // var username = Object.keys(sessionStorage).toString();
-          // _user = JSON.parse(sessionStorage.getItem(username));
+
           if (sessionStorage.length == 1) {
             $('#update_saldo').click(function (){
               compute_balance(_user);
@@ -104,7 +102,7 @@
         <input type="text" name="amount" id="amount" required/>
         Seleziona la valuta:
         <select class="currencies" id="curr_2_wall">
-          <!-- carico le options e seleziono il valore di default -->
+          <!-- carico le options-->
           <script type="text/javascript">
           $("#curr_2_wall").load("files/currencies.html");
           </script>
@@ -116,9 +114,7 @@
 
     <script type="text/javascript">
       $("#change").click(function(){
-        // var username = Object.keys(sessionStorage).toString();
-        // _user = JSON.parse(sessionStorage.getItem(username));
-        // devo prendere value, currency e rate
+
         var value = document.getElementById("amount").value;
         var deposit = compute_deposit(_user);
 
@@ -143,7 +139,6 @@
       });
     </script>
 
-    <!-- aggiungo uno spazio tra i 2 div -->
     <div>
       &nbsp;
     </div>
@@ -169,8 +164,7 @@
     <script type="text/javascript">
 
     $("#plot-btn").click(function(){
-      // var username = Object.keys(sessionStorage).toString();
-      // _user = JSON.parse(sessionStorage.getItem(username));
+
       $('#hide-plot-btn').fadeIn();
 
       var option_selected = $('#plot-type').val();

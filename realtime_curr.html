@@ -15,26 +15,36 @@
 	val1 = 1;
 	date = "2017-01-01";
 
-// suo
-
-// 	// genero HTML bandierine
-// 	$(document).ready(function () {
-// 		$.get("files/currencies.html", function (data) {
-//       // console.log(data);
-// 		data2 = data.split(">",1);
-// 		// console.log(data2);
-// 		var Costruttore_HTML_img_Bandiere ="";
-// 		// console.log(data2.length);
-// 		for (i = 0; i < data2.length; i++) {
-// 			var flg = String(data2.slice(16,2));
-// 			flg = flg.toLocaleLowerCase();
-// 			// console.log(data2.slice(9));
-// 			Costruttore_HTML_img_Bandiere += '<img class="bandiere" src="currency-flags/src/flags/'+flg+'.png" '+data2.slice(9)+' />\n'
-// 			}
-// 		console.log(Costruttore_HTML_img_Bandiere);
-// //                    $('#container').html(myHrefCollection);
-// 		});
-// 	});
+	// caricamento dinamico bandiere
+	// $(document).ready(function () {
+	// 	$.get("files/currencies.html", function (data) {
+	// 		// console.log(data);
+  //
+	// 		data1 = data.split("\n");
+	// 		// console.log(data1);
+	// 		var data2 = [];
+  //
+	// 		var Costruttore_HTML_img_Bandiere ="";
+	// 		// console.log(data1.length);
+	// 		for (i = 0; i < data1.length-1; i++) {
+	// 			// console.log(data1[i]);
+	// 			data2 = data1[i].split(">",1);
+	// 			// console.log("data2 è "+data2);
+	// 			data3 = data2[0].split(" ");
+	// 			data4 = data2[0].slice(20);
+	// 			// console.log("data3 è "+data3[1]);
+	// 			// console.log("data4 è: "+data4);
+  //
+	// 			var flg = data3[1].slice(7,10);
+	// 			flg = flg.toLocaleLowerCase();
+  //
+	// 			// console.log("flag: "+flg);
+	// 			Costruttore_HTML_img_Bandiere += '<img class="bandiere" width=10% src="currency-flags/src/flags/'+flg+'.png" id="'+flg.toUpperCase()+'" '+data4+' />\n'
+	// 			}
+	// 		// console.log(Costruttore_HTML_img_Bandiere);
+	// 			$('#content-bandiere').html(Costruttore_HTML_img_Bandiere);
+	// 	});
+	// });
 </script>
 
 <style>
@@ -110,33 +120,33 @@
 
     <div class="box1" id="bandiere" style="text-align:center; height:auto; padding: 10px">
       <div class="content" id="content">
-        <img id='USD' src="currency-flags/src/flags/usd.png" class="bandiere" width="10%" title='United States Dollar' />
-        <img id='BTC' src="currency-flags/src/flags/btc.png" class="bandiere" width="10%" title='Bitcoin' />
-        <img id='AED' src="currency-flags/src/flags/aed.png" class="bandiere" width="10%" title='United Arab Emirates Dirham' />
-        <img id='ARS' src="currency-flags/src/flags/ars.png" class="bandiere" width="10%" title='Argentine Peso' />
-        <img id='AUD' src="currency-flags/src/flags/aud.png" class="bandiere" width="10%" title='Australian Dollar' />
-        <img id='BRL' src="currency-flags/src/flags/brl.png" class="bandiere" width="10%" title='Brazilian Real' />
-        <img id='CAD' src="currency-flags/src/flags/cad.png" class="bandiere" width="10%" title='Canadian Dollar' />
-        <img id='CHF' src="currency-flags/src/flags/chf.png" class="bandiere" width="10%" title='Swiss Franc' />
-        <img id='CNY' src="currency-flags/src/flags/cny.png" class="bandiere" width="10%" title='Chinese Yuan' />
-        <img id='COP' src="currency-flags/src/flags/cop.png" class="bandiere" width="10%" title='Colombian Peso' />
-        <img id='CZK' src="currency-flags/src/flags/czk.png" class="bandiere" width="10%" title='Czech Republic Koruna' />
-        <img id='EGP' src="currency-flags/src/flags/egp.png" class="bandiere" width="10%" title='Egyptian Pound' />
-        <img id='ETB' src="currency-flags/src/flags/etb.png" class="bandiere" width="10%" title='Ethiopian Birr' />
-        <img id='EUR' src="currency-flags/src/flags/eur.png" class="bandiere" width="10%" title='Euro' />
-        <img id='GBP' src="currency-flags/src/flags/gbp.png" class="bandiere" width="10%" title='British Pound Sterling' />
-        <img id='HKD' src="currency-flags/src/flags/hkd.png" class="bandiere" width="10%" title='Hong Kong Dollar' />
-        <img id='ILS' src="currency-flags/src/flags/ils.png" class="bandiere" width="10%" title='Israeli New Sheqel' />
-        <img id='INR' src="currency-flags/src/flags/inr.png" class="bandiere" width="10%" title='Indian Rupee' />
-        <img id='IQD' src="currency-flags/src/flags/iqd.png" class="bandiere" width="10%" title='Iraqi Dinar' />
-        <img id='IRR' src="currency-flags/src/flags/irr.png" class="bandiere" width="10%" title='Iranian Rial' />
-        <img id='JPY' src="currency-flags/src/flags/jpy.png" class="bandiere" width="10%" title='Japanese Yen' />
-        <img id='KPW' src="currency-flags/src/flags/kpw.png" class="bandiere" width="10%" title='North Korean Won' />
-        <img id='KRW' src="currency-flags/src/flags/krw.png" class="bandiere" width="10%" title='South Korean Won' />
-        <img id='MXN' src="currency-flags/src/flags/mxn.png" class="bandiere" width="10%" title='Mexican Peso' />
-        <img id='NOK' src="currency-flags/src/flags/nok.png" class="bandiere" width="10%" title='Norwegian Krone' />
-        <img id='RUB' src="currency-flags/src/flags/rub.png" class="bandiere" width="10%" title='Russian Ruble' />
-        <img id='SGD' src="currency-flags/src/flags/sgd.png" class="bandiere" width="10%" title='Singapore Dollar' />
+        <img id='USD' src="currency-flags/usd.png" class="bandiere" width="10%" title='United States Dollar' />
+        <img id='BTC' src="currency-flags/btc.png" class="bandiere" width="10%" title='Bitcoin' />
+        <img id='AED' src="currency-flags/aed.png" class="bandiere" width="10%" title='United Arab Emirates Dirham' />
+        <img id='ARS' src="currency-flags/ars.png" class="bandiere" width="10%" title='Argentine Peso' />
+        <img id='AUD' src="currency-flags/aud.png" class="bandiere" width="10%" title='Australian Dollar' />
+        <img id='BRL' src="currency-flags/brl.png" class="bandiere" width="10%" title='Brazilian Real' />
+        <img id='CAD' src="currency-flags/cad.png" class="bandiere" width="10%" title='Canadian Dollar' />
+        <img id='CHF' src="currency-flags/chf.png" class="bandiere" width="10%" title='Swiss Franc' />
+        <img id='CNY' src="currency-flags/cny.png" class="bandiere" width="10%" title='Chinese Yuan' />
+        <img id='COP' src="currency-flags/cop.png" class="bandiere" width="10%" title='Colombian Peso' />
+        <img id='CZK' src="currency-flags/czk.png" class="bandiere" width="10%" title='Czech Republic Koruna' />
+        <img id='EGP' src="currency-flags/egp.png" class="bandiere" width="10%" title='Egyptian Pound' />
+        <img id='ETB' src="currency-flags/etb.png" class="bandiere" width="10%" title='Ethiopian Birr' />
+        <img id='EUR' src="currency-flags/eur.png" class="bandiere" width="10%" title='Euro' />
+        <img id='GBP' src="currency-flags/gbp.png" class="bandiere" width="10%" title='British Pound Sterling' />
+        <img id='HKD' src="currency-flags/hkd.png" class="bandiere" width="10%" title='Hong Kong Dollar' />
+        <img id='ILS' src="currency-flags/ils.png" class="bandiere" width="10%" title='Israeli New Sheqel' />
+        <img id='INR' src="currency-flags/inr.png" class="bandiere" width="10%" title='Indian Rupee' />
+        <img id='IQD' src="currency-flags/iqd.png" class="bandiere" width="10%" title='Iraqi Dinar' />
+        <img id='IRR' src="currency-flags/irr.png" class="bandiere" width="10%" title='Iranian Rial' />
+        <img id='JPY' src="currency-flags/jpy.png" class="bandiere" width="10%" title='Japanese Yen' />
+        <img id='KPW' src="currency-flags/kpw.png" class="bandiere" width="10%" title='North Korean Won' />
+        <img id='KRW' src="currency-flags/krw.png" class="bandiere" width="10%" title='South Korean Won' />
+        <img id='MXN' src="currency-flags/mxn.png" class="bandiere" width="10%" title='Mexican Peso' />
+        <img id='NOK' src="currency-flags/nok.png" class="bandiere" width="10%" title='Norwegian Krone' />
+        <img id='RUB' src="currency-flags/rub.png" class="bandiere" width="10%" title='Russian Ruble' />
+        <img id='SGD' src="currency-flags/sgd.png" class="bandiere" width="10%" title='Singapore Dollar' />
 
       </div>
     </div>
@@ -179,7 +189,7 @@
   			});
   		});
 
-  	//	jQuery: DOPPIO CLICK SU BANDIERA
+  	//	jQuery: CLICK SU GRAFICO
   		$(document).ready(function(){
   			// $(".bandiere").dblclick(function(){
 				$("#grafico").click(function(){
@@ -234,9 +244,7 @@
 
 					$('#GraficoStoricoValuta').fadeIn();
           Plotly.newPlot('GraficoStoricoValuta', data, layout);
-						// var stile = "top=10, left=10, width=250, height=200, status=no, menubar=no, toolbar=no, scrollbars=no";
 
-						// window.open("grafico.html","",stile);
         	});
 
   			});
@@ -384,11 +392,6 @@
 
 			</div>
 		</div>
-<!--
-    // var from = $("#curr_1").val();
-    // var to = $("#curr_2").val();
-    // var val1 = document.getElementById('val1').value; -->
-
 
     <script type="text/javascript">
     // se l'utente non è loggato, non accede alla feature portafoglio.
